@@ -1,0 +1,151 @@
+{
+    "layer": "top",
+    "position": "top",
+    "height": 30,
+
+    "modules-left": [
+		"hyprland/workspaces", 
+		"custom/arrow8", 
+		"hyprland/window", 
+		"custom/arrow7"
+	],
+
+
+    "modules-center": [],
+
+
+    "modules-right": [
+		"custom/arrow6",
+		"custom/youtubemusic", 
+		"custom/arrow5", 
+		"pulseaudio", 
+		"custom/arrow4", 
+		"network", 
+		"custom/arrow3",
+		"battery",
+		"custom/arrow2", 
+		"clock", 
+		"custom/arrow1",
+		"tray"
+	],
+
+	// MODULES
+
+    "hyprland/workspaces": {
+	"persistent-workspaces": {
+	  "*": [ 1, 3, 5, 9],
+	},
+        "format": "{name}",
+        "disable-scroll": true
+    },
+    "hyprland/window": {
+        "max-length": 80,
+        "tooltip": false,
+	"format": "{}",
+	"rewrite": {
+        	"(.*) — Mozilla Firefox": "$1",
+		"(.*) - Microsoft Edge": "$1",
+		
+		/*Enter any suffixes here to remove them*/
+	},
+	"separate-outputs": true
+    },
+    "clock": {
+        "format": "{:%a %d %b %H:%M}",
+        "tooltip": false
+    },
+    "battery": {
+        "format": "{capacity}%",
+        "format-alt": "{time} {icon}",
+        "format-icons": ["", "", "", "", ""],
+        "format-charging": "{capacity}% ⚡",
+        "interval": 30,
+        "states": {
+            "warning": 25,
+            "critical": 10
+        },
+        "tooltip": false
+    },
+    "network": {
+        "format": "{icon}",
+        "format-alt": "{ipaddr}/{cidr} {icon}",
+        "format-alt-click": "click-right",
+        "format-icons": {
+            "wifi": ["󰤯", "󰤟", "󰤢", "󰤥", "󰤨"],
+            "ethernet": ["󰈁"],
+            "disconnected": ["󰤮"]
+        },
+        "on-click": "nm-connection-editor",
+    "tooltip": false
+    },
+    "pulseaudio": {
+        "format": "{icon}",
+        "format-alt": "{volume} {icon}",
+        "format-alt-click": "click-right",
+        "format-muted": "󰝟",
+        "format-icons": {
+            "phone": [" ", " ", " "],
+            "default": ["", "", ""]
+        },
+        "scroll-step": 10,
+        "on-click": "pavucontrol",
+        "tooltip": false
+    },
+    "custom/youtubemusic": {
+	"interval": 1,
+        "return-type": "json",
+        "exec": "/home/faiyaz/.config/waybar/modules/youtubemusic.sh",
+        "exec-if": "ps aux | pgrep -f 'chromium'",
+        "escape": true,
+	"format": "{}",
+	"on-click": "playerctl previous",
+	"on-click-middle": "playerctl play-pause",
+	"on-click-right": "playerctl next"
+    },
+
+    "tray": {
+        "icon-size": 18
+    },
+
+       "custom/arrow1": {
+		"format": "",
+		"tooltip": false
+	},
+
+	"custom/arrow2": {
+		"format": "",
+		"tooltip": false
+	},
+
+	"custom/arrow3": {
+		"format": "",
+		"tooltip": false
+	},
+
+	"custom/arrow4": {
+		"format": "",
+		"tooltip": false
+	},
+
+	"custom/arrow5": {
+		"format": "",
+		"tooltip": false
+	},
+
+	"custom/arrow6": {
+		"format": "",
+		"tooltip": false
+	},
+        
+    	"custom/arrow7": {
+		"format": "",
+		"tooltip": false
+	},
+
+  	"custom/arrow8": {
+		"format": "",
+		"tooltip": false
+	}
+    
+
+}
