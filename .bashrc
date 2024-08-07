@@ -29,14 +29,14 @@ alias pacs='sudo pacman -S'
 alias paki='paru -S'
 
 # video wallpaper commands
-alias video='bash /home/faiyaz/.config/mpvpaper/autovideo.s > /dev/null 2>&1 &'
-alias novideo='bash /home/faiyaz/.config/mpvpaper/forcekill.sh'
+alias video='bash /home/handesh/.config/mpvpaper/autovideo.s > /dev/null 2>&1 &'
+alias novideo='bash /home/handesh/.config/mpvpaper/forcekill.sh'
 alias unlock='pkill -f bakalock.sh && pkill -f mpvpaper'
-alias wallpaper='swww img "/home/faiyaz/Desktop/wallpapers/RDT_20220205_2330068786074992053066103.jpg"'
-alias download='cd ~/Desktop/videowallpaper && bash /home/faiyaz/.config/mpvpaper/download.sh'
+alias wallpaper='swww img "/home/handesh/Desktop/wallpapers/RDT_20220205_2330068786074992053066103.jpg"'
+alias download='cd ~/Desktop/videowallpaper && bash /home/handesh/.config/mpvpaper/download.sh'
 
 # git access token
-alias gitaccess='cat /home/faiyaz/GitAccessToken'
+alias gitaccess='cat /home/handesh/GitAccessToken'
 
 # mullvad account
 alias vpn='echo "7538929427288099"'
@@ -74,3 +74,7 @@ alias calm='sudo firewall-cmd --panic-off'
 alias arepanic='sudo firewall-cmd --query-panic'
 
 export TESSDATA_PREFIX=/usr/share/tessdata/
+
+
+
+
