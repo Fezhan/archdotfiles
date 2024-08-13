@@ -66,7 +66,7 @@ alias private='ip a show wlo1 | grep -oP "(?<=inet\s)\d+(\.\d+){3}"'
 
 # Mount Drive
 
-alias drive='sudo mount /dev/sdc1 /pendrive'
+alias drive='sudo mount /dev/sdb1 /pendrive'
 
 # firewall-cmd commands
 alias panic='sudo firewall-cmd --panic-on'

@@ -2,20 +2,20 @@
 
 # Function to find the Chromium player name
 find_chromium_player() {
-    playerctl -l | grep -i 'chromium' | head -n 1
+    playerctl -l
 }
 
 # Get the Chromium player name
 player=$(find_chromium_player)
 
-if [ -z "$player" ]; then
+if [ "$player" = "No players found" ]; then
     # If no Chromium player found, exit
     echo -e "{\"text\":\"\", \"class\":\"\"}"
     exit 0
 fi
 
 class=$(playerctl metadata --player= --format '{{lc(status)}}')
-icon=" "
+icon="\uf16a "
 
 if [[ $class == "playing" ]]; then
     info=$(playerctl metadata --player= --format '{{title}} - {{artist}}')
