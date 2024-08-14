@@ -1,0 +1,38 @@
+[2024-08-14 19:15:54.932] [info] Using configuration file /home/handesh/.config/waybar/config
+[2024-08-14 19:15:54.935] [info] Unable to receive desktop appearance: GDBus.Error:org.freedesktop.DBus.Error.UnknownMethod: No such interface “org.freedesktop.portal.Settings” on object at path /org/freedesktop/portal/desktop
+[2024-08-14 19:15:54.935] [info] Using CSS file /home/handesh/.config/waybar/style.css
+[2024-08-14 19:15:54.943] [info] Hyprland IPC starting
+[2024-08-14 19:15:54.946] [info] Loading persistent workspaces from Hyprland workspace rules
+[2024-08-14 19:15:55.187] [info] Bar configured (width: 1920, height: 41) for output: eDP-1
+[2024-08-14 19:21:11.385] [info] Using configuration file /home/handesh/.config/waybar/config
+[2024-08-14 19:21:11.387] [info] Unable to receive desktop appearance: GDBus.Error:org.freedesktop.DBus.Error.UnknownMethod: No such interface “org.freedesktop.portal.Settings” on object at path /org/freedesktop/portal/desktop
+[2024-08-14 19:21:11.387] [info] Using CSS file /home/handesh/.config/waybar/style.css
+[2024-08-14 19:21:11.398] [info] Hyprland IPC starting
+[2024-08-14 19:21:11.401] [info] Loading persistent workspaces from Hyprland workspace rules
+[2024-08-14 19:21:11.632] [info] Bar configured (width: 1920, height: 41) for output: eDP-1
+
+** (waybar:57661): WARNING **: 19:22:34.442: Status Notifier Item with bus name ':1.91' and object path '/StatusNotifierItem' is already registered
+
+** (waybar:57661): WARNING **: 19:22:34.446: Status Notifier Host with bus name ':1.10136' and object path '/StatusNotifierHost/0' is already registered
+Terminated
+[2024-08-14 19:22:37.760] [info] Using configuration file /home/handesh/.config/waybar/config
+[2024-08-14 19:22:37.764] [info] Unable to receive desktop appearance: GDBus.Error:org.freedesktop.DBus.Error.UnknownMethod: No such interface “org.freedesktop.portal.Settings” on object at path /org/freedesktop/portal/desktop
+[2024-08-14 19:22:37.764] [info] Using CSS file /home/handesh/.config/waybar/style.css
+[2024-08-14 19:22:37.778] [info] Hyprland IPC starting
+[2024-08-14 19:22:37.783] [info] Loading persistent workspaces from Hyprland workspace rules
+[2024-08-14 19:22:38.054] [info] Bar configured (width: 1920, height: 41) for output: eDP-1
+
+** (waybar:57762): WARNING **: 19:31:45.413: Status Notifier Item with bus name ':1.91' and object path '/StatusNotifierItem' is already registered
+
+** (waybar:57762): WARNING **: 19:31:45.418: Status Notifier Host with bus name ':1.10140' and object path '/StatusNotifierHost/0' is already registered
+
+** (waybar:57762): WARNING **: 19:32:27.100: Status Notifier Item with bus name ':1.91' and object path '/StatusNotifierItem' is already registered
+
+** (waybar:57762): WARNING **: 19:32:27.104: Status Notifier Host with bus name ':1.10140' and object path '/StatusNotifierHost/0' is already registered
+Terminated
+[2024-08-14 19:32:35.175] [info] Using configuration file /home/handesh/.config/waybar/config
+[2024-08-14 19:32:35.178] [info] Unable to receive desktop appearance: GDBus.Error:org.freedesktop.DBus.Error.UnknownMethod: No such interface “org.freedesktop.portal.Settings” on object at path /org/freedesktop/portal/desktop
+[2024-08-14 19:32:35.178] [info] Using CSS file /home/handesh/.config/waybar/style.css
+[2024-08-14 19:32:35.187] [info] Hyprland IPC starting
+[2024-08-14 19:32:35.189] [info] Loading persistent workspaces from Hyprland workspace rules
+[2024-08-14 19:32:35.474] [info] Bar configured (width: 1920, height: 41) for output: eDP-1

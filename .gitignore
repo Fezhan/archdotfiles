@@ -13,7 +13,7 @@
 !.config/swww/
 !.config/sxhkd/
 !.config/temp/waybar/
-!.config/waybar/
+!.config/waybar/*
 !.config/wofi/
 !.config/dolphinrc
 !.config/mimeapps.list
