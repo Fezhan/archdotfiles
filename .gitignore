@@ -1,6 +1,23 @@
 *
 
-!.config/**
+!.config/alacritty/
+!.config/hypr/
+!.config/i3/
+!.config/icon-explorer/
+!.config/lf/
+!.config/mpvpaper/
+!.config/ranger/
+!.config/rofi/
+!.config/sway/
+!.config/swaylock/
+!.config/swww/
+!.config/sxhkd/
+!.config/temp/waybar/
+!.config/waybar/
+!.config/wofi/
+!.config/dolphinrc
+!.config/mimeapps.list
+!.config/pavucontrol.ini
 !.gitignore
 !.bashrc
 !.gitconfig

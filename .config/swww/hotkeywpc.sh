@@ -1,40 +1,45 @@
 #!/bin/bash
 
+# Change to the script directory
+cd ~/.config/swww
+
 pkill mpvpaper
 
-# Set the path to the wallpapers directory
-wallpapersDir="/home/faiyaz/Desktop/wallpapers"
+# Directory containing wallpapers
+WALLPAPERS="$HOME/Desktop/wallpapers"
+LOGFILE="$HOME/.config/swww/logfile.txt"
 
-# Get a list of all image files in the wallpapers directory
-wallpapers=("$wallpapersDir"/*)
-
-# Check if the wallpapers array is empty
-if [ ${#wallpapers[@]} -eq 0 ]; then
-    echo "No wallpapers found in the specified directory."
-    exit 1
+# Create the logfile if it doesn't exist
+if [ ! -f "$LOGFILE" ]; then
+    touch "$LOGFILE"
 fi
 
-# Run the swww query command to get information about the current wallpaper
-queryOutput=$(swww query)
-
-# Extract the first line from the query output
-currentWallpaper=$(echo "$queryOutput" | head -n 1)
-
-# Slice off the first 58 characters to get the current wallpaper
-currentWallpaper=${currentWallpaper:57}
-
-index=-1
-for ((i=0; i<${#wallpapers[@]}; i++)); do
-    if [ "${wallpapers[i]}" == "$currentWallpaper" ]; then
-        index=$((i+1))
-        break
-    fi
-done
-
-# Check if the current wallpaper was found in the wallpapers array
-if [ $index -ne -1 ]; then
-    # Update the wallpaper using the swww img command
-    swww img """${wallpapers[$index]}""" --transition-fps 60 --transition-type any --transition-duration 1.0
-else
-    swww img """${wallpapers[0]}""" --transition-fps 60 --transition-type any --transition-duration 1.0
+# Populate the logfile with filenames if it's empty
+if [ ! -s "$LOGFILE" ]; then
+    ls "$WALLPAPERS"/* | sed "s|$WALLPAPERS/||" > "$LOGFILE"
 fi
+
+# Pick a filename at random from the logfile
+FILE_TO_PLAY=$(shuf -n 1 "$LOGFILE")
+
+# Full path of the selected file
+FILE_PATH="$WALLPAPERS/$FILE_TO_PLAY"
+
+# Set the wallpaper using swww
+swww img "$FILE_PATH" --transition-fps 60 --transition-type any --transition-duration 1.7
+
+# Remove the chosen filename from the logfile
+grep -v "^$FILE_TO_PLAY$" "$LOGFILE" > "$LOGFILE.tmp"
+mv "$LOGFILE.tmp" "$LOGFILE"
+
+# Check if logfile is empty and refill it if necessary
+if [ ! -s "$LOGFILE" ]; then
+    # Refill the logfile with all filenames from the directory
+    ls "$WALLPAPERS"/* | sed "s|$WALLPAPERS/||" > "$LOGFILE"
+fi
+
+# Ensure there is no empty line left in the logfile
+sed -i '/^$/d' "$LOGFILE"
+
+exit
+

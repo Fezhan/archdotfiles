@@ -10,7 +10,7 @@ fi
 url=$1
 
 # Define the download command
-download_command="yt-dlp -f 'bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]' $url -o '/home/faiyaz/Desktop/videowallpaper/%(title)s.%(ext)s'"
+download_command="yt-dlp -f 'bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]' $url -o '/home/handesh/Desktop/videowallpaper/%(title)s.%(ext)s'"
 
 # Execute the download command
 eval $download_command
