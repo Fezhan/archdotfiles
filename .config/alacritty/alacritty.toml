@@ -1,18 +1,16 @@
 import = [
-	"/home/faiyaz/.config/alacritty/alacritty-theme/themes/Mariana.toml"
- ]
+  "/usr/lib/node_modules/alacritty-themes/themes/Alabaster.dark.toml"
+]
 
 [window]
-opacity=0.88
-padding.x=0
-padding.y=5
+opacity = 0.88
 
-
-
+  [window.padding]
+  x = 0
+  y = 5
 
 [font]
-size = 16.0
+size = 16
 
-[font.normal]
-family = "RobotoMono Nerd Font"
-
+  [font.normal]
+  family = "RobotoMono Nerd Font"
