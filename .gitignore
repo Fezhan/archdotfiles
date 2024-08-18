@@ -18,6 +18,7 @@
 !.config/dolphinrc
 !.config/mimeapps.list
 !.config/pavucontrol.ini
+!.config/mpvpaper/*
 !.gitignore
 !.bashrc
 !.gitconfig
