@@ -26,7 +26,7 @@ FILE_TO_PLAY=$(shuf -n 1 "$LOGFILE")
 FILE_PATH="$WALLPAPERS/$FILE_TO_PLAY"
 
 # Set the wallpaper using mpvpaper
-mpvpaper -o "no-audio loop" '*' "$FILE_PATH"
+mpvpaper -o "no-audio loop" '*' "$FILE_PATH" --sub-fps=60
 
 # Remove the chosen filename from the logfile
 grep -v "^$FILE_TO_PLAY$" "$LOGFILE" > "$LOGFILE.tmp"
