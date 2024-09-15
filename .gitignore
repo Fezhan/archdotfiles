@@ -19,6 +19,7 @@
 !.config/mimeapps.list
 !.config/pavucontrol.ini
 !.config/mpvpaper/*
+!scripts/*
 !.gitignore
 !.bashrc
 !.gitconfig

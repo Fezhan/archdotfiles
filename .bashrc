@@ -66,15 +66,24 @@ alias private='ip a show wlo1 | grep -oP "(?<=inet\s)\d+(\.\d+){3}"'
 
 # Mount Drive
 
-alias drive='sudo mount /dev/sdb1 /pendrive'
+alias drive='sudo mount /dev/sdb1 /home/handesh/pendrive'
+
+# symbolic link remover
+alias removesymlink='find . -type l -delete'
+
 
 # firewall-cmd commands
 alias panic='sudo firewall-cmd --panic-on'
 alias calm='sudo firewall-cmd --panic-off'
 alias arepanic='sudo firewall-cmd --query-panic'
 
+
+# Easy add combined audio profile
+alias multivol='~/scripts/./sinks.sh'
+
 export TESSDATA_PREFIX=/usr/share/tessdata/
 
-
-
+# ~/.profile or ~/.bashrc
+export XCURSOR_THEME=BreezeX-Dark
+export XCURSOR_SIZE=24
 
