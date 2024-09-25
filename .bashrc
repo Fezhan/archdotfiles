@@ -21,7 +21,7 @@ parse_git_info() {
 }
 
 # Customized PS1 with Git branch and repository name display
-PS1='\[\e]0;\u@\h: \w\a\]\[\033[32m\]\u@\h \[\033[33;1m\]\w\[\033[36m\]$(parse_git_info)\[\033[00m\] \$ '
+PS1='\[\e]0;\u@\h: \w\a\]\[\033[32m\]\u@\h \[\033[33;1m\]\w\[\033[36m\]$(parse_git_info)\[\033[00m\] '
 
 # pacman
 alias pacsyu='sudo pacman -Syu'
@@ -66,11 +66,15 @@ alias private='ip a show wlo1 | grep -oP "(?<=inet\s)\d+(\.\d+){3}"'
 
 # Mount Drive
 
-alias drive='sudo mount /dev/sdb1 /home/handesh/pendrive'
+alias drive='sudo mount /dev/sdb1 /media'
 
 # symbolic link remover
 alias removesymlink='find . -type l -delete'
 
+
+# Start Jellyfin
+
+alias jelly='sudo mount /dev/sdb1 /media && sudo systemctl start jellyfin'
 
 # firewall-cmd commands
 alias panic='sudo firewall-cmd --panic-on'
@@ -80,6 +84,14 @@ alias arepanic='sudo firewall-cmd --query-panic'
 
 # Easy add combined audio profile
 alias multivol='~/scripts/./sinks.sh'
+
+# Start the jellyfin server
+alias serve='systemctl start jellyfin'
+alias die='systemctl stop jellyfin'
+
+# Brightness
+alias bright='brightnessctl set 100%'
+alias dark='brightnessctl set 0%'
 
 export TESSDATA_PREFIX=/usr/share/tessdata/
 
