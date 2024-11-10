@@ -74,7 +74,13 @@ alias removesymlink='find . -type l -delete'
 
 # Start Jellyfin
 
-alias jelly='sudo mount /dev/sdb1 /media && sudo systemctl start jellyfin'
+alias jelly='sudo systemctl start jellyfin'
+
+# If videos aren't playing in MPVPlayer or jellyfin, run this link
+
+alias fixvideo='systemctl --user restart pipewire
+systemctl --user restart pipewire-pulse
+'
 
 # firewall-cmd commands
 alias panic='sudo firewall-cmd --panic-on'
