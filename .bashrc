@@ -105,3 +105,10 @@ export TESSDATA_PREFIX=/usr/share/tessdata/
 export XCURSOR_THEME=BreezeX-Dark
 export XCURSOR_SIZE=24
 
+
+# Created by `pipx` on 2024-12-15 23:38:28
+export PATH="$PATH:/home/handesh/.local/bin"
+
+
+# Hyprshot save location
+export HYPRSHOT_DIR=~/Desktop/Screenshots
