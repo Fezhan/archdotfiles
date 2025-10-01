@@ -23,10 +23,28 @@ parse_git_info() {
 # Customized PS1 with Git branch and repository name display
 PS1='\[\e]0;\u@\h: \w\a\]\[\033[32m\]\u@\h \[\033[33;1m\]\w\[\033[36m\]$(parse_git_info)\[\033[00m\] '
 
+# Yazi function to change the current working directory when exiting Yazi
+function manager() {
+	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
+	yazi "$@" --cwd-file="$tmp"
+	IFS= read -r -d '' cwd < "$tmp"
+	[ -n "$cwd" ] && [ "$cwd" != "$PWD" ] && builtin cd -- "$cwd"
+	rm -f -- "$tmp"
+}
+
+
 # pacman
 alias pacsyu='sudo pacman -Syu'
 alias pacs='sudo pacman -S'
 alias paki='paru -S'
+
+# waybar
+alias waybar='waybar & disown'
+
+
+# Wlan0 on and off
+alias wlan0on='sudo ip link set wlan0 up'
+alias wlan0off='sudo ip link set wlan0 down'
 
 # video wallpaper commands
 alias video='bash ~/.config/mpvpaper/autovideo.sh > /dev/null 2>&1 &'
@@ -41,6 +59,9 @@ alias gitaccess='cat ~/GitAccessToken'
 # mullvad account
 alias vpn='echo "7538929427288099"'
 
+# edit hyprland.conf
+alias HyprlandConf='vim ~/.config/hypr/hyprland.conf'
+
 # sudo config
 alias biggus='echo -e "\nDickus!\n" && sudo'
 
@@ -51,8 +72,8 @@ alias lt='exa -T'
 
 # SSH configs
 
-alias shmaster='ssh levihackermann@192.168.1.112'
-alias shslave='ssh levihackermann@192.168.1.251'
+alias raspi='ssh levihackermann@192.168.1.112'
+alias gaming='ssh levihackermann@gaming'
 
 # RPI Imager
 
@@ -61,7 +82,7 @@ alias imager='sudo -E rpi-imager'
 # IP
 
 alias public='echo -e "\033[0;31m$(curl -s ipv4.icanhazip.com)\033[0m"'
-alias private='ip a show wlo1 | grep -oP "(?<=inet\s)\d+(\.\d+){3}"'
+alias private='ip a show wlan1 | grep -oP "(?<=inet\s)\d+(\.\d+){3}"'
 
 
 # Mount Drive
@@ -112,3 +133,10 @@ export PATH="$PATH:/home/handesh/.local/bin"
 
 # Hyprshot save location
 export HYPRSHOT_DIR=~/Desktop/Screenshots
+
+# Hyprland environment variables
+export XDG_CURRENT_DESKTOP=Hyprland
+export XDG_SESSION_TYPE=wayland
+export XDG_SESSION_DESKTOP=Hyprland
+export GDK_BACKEND=wayland,x11
+export QT_QPA_PLATFORM=wayland
