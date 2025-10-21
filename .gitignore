@@ -1,5 +1,20 @@
+# Ignore everything
 *
 
+# Unignore .gitignore and other root-level configs
+!.gitignore
+!.bashrc
+!.gitconfig
+!.installedpackages
+
+# Unignore .config itself
+!.config/
+
+# Then unignore folders inside it
+!.config/scripts/
+!.config/scripts/*
+
+# Your existing unignore rules
 !.config/alacritty/
 !.config/hypr/
 !.config/i3/
@@ -20,7 +35,4 @@
 !.config/pavucontrol.ini
 !.config/mpvpaper/*
 !scripts/*
-!.gitignore
-!.bashrc
-!.gitconfig
-!.installedpackages
+

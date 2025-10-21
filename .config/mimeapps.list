@@ -14,13 +14,18 @@ x-scheme-handler/sgnl=signalbeta.desktop
 x-scheme-handler/signalcaptcha=signalbeta.desktop
 application/zip=7zFM.desktop
 x-scheme-handler/jetbrains=jetbrains-toolbox.desktop
+image/heif=chromium.desktop
+application/pdf=firefox.desktop
 
 [Added Associations]
 text/plain=org.remmina.Remmina.desktop;
 image/tiff=chromium.desktop;
 image/jpeg=cc.cubocore.CoreImage.desktop;firefox.desktop;
 image/x-canon-cr2=cc.cubocore.CoreImage.desktop;
-application/pdf=com.microsoft.Edge.desktop;
+application/pdf=com.microsoft.Edge.desktop;firefox.desktop;
 image/png=com.microsoft.Edge.desktop;
 application/zip=7zFM.desktop;
 application/x-virt-viewer=virt-manager.desktop;
+image/heif=firefox.desktop;chromium.desktop;
+video/quicktime=mpv.desktop;
+application/x-php=microsoft-edge.desktop;chromium.desktop;firefox.desktop;

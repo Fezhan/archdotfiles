@@ -32,6 +32,8 @@ function manager() {
 	rm -f -- "$tmp"
 }
 
+# Powershell
+alias powershell='pwsh'
 
 # pacman
 alias pacsyu='sudo pacman -Syu'
