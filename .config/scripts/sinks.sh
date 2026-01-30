@@ -1,9 +1,12 @@
 #!/bin/bash
 
+echo "Available sinks:"
+pactl list sinks short
+echo
+
 # Check if at least one sink name is provided
 if [ $# -lt 1 ]; then
   echo "Usage: $0 <sink1> <sink2> [sink3] ... [sinkN]"
-  pactl list sinks short
   exit 1
 fi
 

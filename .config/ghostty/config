@@ -69,7 +69,7 @@ background-opacity = 0.88
 # FONT
 ##########
 
-font-family = RobotoMono Nerd Font
+font-family = JetBrainsMono Nerd Font
 font-size = 16
 
 ##########

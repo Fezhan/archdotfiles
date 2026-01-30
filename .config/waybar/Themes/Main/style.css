@@ -62,7 +62,7 @@
 #waybar {
 	background: rgba(40, 40, 40, 0.8784313725); /* #282828e0 */
 	color: @white;
-	font-family: RobotoMono Nerd Font;
+	font-family: "JetBrainsMono Nerd Font";
 	font-size: 11pt;
 	/*font-weight: bold;*/
 }
