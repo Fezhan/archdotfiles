@@ -113,7 +113,7 @@ alias arepanic='sudo firewall-cmd --query-panic'
 
 
 # Easy add combined audio profile
-alias multivol='~/scripts/./sinks.sh'
+alias multivol='~/.config/scripts/./sinks.sh'
 
 # Start the jellyfin server
 alias serve='systemctl start jellyfin'
