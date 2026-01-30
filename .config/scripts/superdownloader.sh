@@ -24,31 +24,37 @@ while :; do
 done
 
 # --- Prompt: Output directory ---
-DEFAULT_OUT="${HOME}/Videos"
+DEFAULT_OUT="${HOME}/Downloads"
 read -r -p "Enter output directory [${DEFAULT_OUT}]: " OUTPUT_DIRECTORY
 OUTPUT_DIRECTORY="${OUTPUT_DIRECTORY:-$DEFAULT_OUT}"
 
 # Create output directory if needed
 mkdir -p -- "$OUTPUT_DIRECTORY"
 
-# --- Prompt: Cookies file selection from script dir ---
-# Build the list of .txt files in the script's directory
+# --- Detect cookie files ---
 mapfile -t COOKIE_CANDIDATES < <(find "$SCRIPT_DIR" -maxdepth 1 -type f -name "*.txt" -printf "%f\n" | sort)
 
 echo
 echo "Cookie files in script directory: $SCRIPT_DIR"
 if [[ ${#COOKIE_CANDIDATES[@]} -eq 0 ]]; then
-  echo "  (none found)"
-  echo "You can proceed without cookies or place a cookies export (*.txt) next to this script."
+  echo "  (none found — continuing without cookies)"
   COOKIES_FILE=""
 else
-  echo "  0) No cookies"
+  echo "  0) No cookies (skip)"
   for i in "${!COOKIE_CANDIDATES[@]}"; do
     printf "  %d) %s\n" "$((i+1))" "${COOKIE_CANDIDATES[$i]}"
   done
 
   while :; do
-    read -r -p "Select cookies file by number (0 for none): " choice
+    read -r -p "Select cookies file by number or press Enter to skip: " choice
+
+    # Blank enter → skip cookies
+    if [[ -z "$choice" ]]; then
+      COOKIES_FILE=""
+      break
+    fi
+
+    # Numeric selection
     if [[ "$choice" =~ ^[0-9]+$ ]]; then
       if (( choice == 0 )); then
         COOKIES_FILE=""
@@ -58,6 +64,7 @@ else
         break
       fi
     fi
+
     echo "Invalid selection. Try again."
   done
 fi

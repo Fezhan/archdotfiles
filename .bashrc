@@ -53,7 +53,7 @@ alias video='bash ~/.config/mpvpaper/autovideo.sh > /dev/null 2>&1 &'
 alias novideo='bash ~/.config/mpvpaper/forcekill.sh'
 alias unlock='pkill -f bakalock.sh && pkill -f mpvpaper'
 alias wallpaper='swww img "~/Desktop/wallpapers/wp7997723-colossal-titan-wallpapers.jpg"'
-alias download='cd ~/Desktop/videowallpaper && bash ~/.config/mpvpaper/download.sh'
+alias superdownloader='~/.config/scripts/./superdownloader.sh'
 
 # git access token
 alias gitaccess='cat ~/GitAccessToken'
@@ -103,6 +103,7 @@ alias jelly='sudo systemctl start jellyfin'
 
 alias fixvideo='systemctl --user restart pipewire
 systemctl --user restart pipewire-pulse
+systemctl --user restart wireplumber
 '
 
 # firewall-cmd commands
