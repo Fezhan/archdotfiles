@@ -122,6 +122,7 @@ declare -a CMD
 CMD=( yt-dlp
       -o "$OUTPUT_DIRECTORY/%(title)s.%(ext)s"
       -N 8
+      -t sleep
       --external-downloader aria2c
       --external-downloader-args 'aria2c:-x8 -s8 -k1M --auto-file-renaming=false'
 )
