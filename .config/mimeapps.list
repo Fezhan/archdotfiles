@@ -25,6 +25,9 @@ application/xhtml+xml=firefox.desktop
 application/x-extension-xhtml=firefox.desktop
 application/x-extension-xht=firefox.desktop
 application/vnd.openxmlformats-officedocument.wordprocessingml.document=libreoffice-writer.desktop
+x-scheme-handler/mailto=userapp-Thunderbird-96NLK3.desktop
+message/rfc822=userapp-Thunderbird-96NLK3.desktop
+x-scheme-handler/mid=userapp-Thunderbird-96NLK3.desktop
 
 [Added Associations]
 text/plain=org.remmina.Remmina.desktop;
@@ -50,3 +53,5 @@ application/x-extension-xhtml=firefox.desktop;
 application/x-extension-xht=firefox.desktop;
 application/vnd.openxmlformats-officedocument.wordprocessingml.document=libreoffice-writer.desktop;
 video/mp4=mpv.desktop;
+x-scheme-handler/mailto=userapp-Thunderbird-96NLK3.desktop;
+x-scheme-handler/mid=userapp-Thunderbird-96NLK3.desktop;
