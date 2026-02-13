@@ -144,3 +144,4 @@ export XDG_SESSION_DESKTOP=Hyprland
 export GDK_BACKEND=wayland,x11
 export QT_QPA_PLATFORM=wayland
 export EDITOR=vim
+

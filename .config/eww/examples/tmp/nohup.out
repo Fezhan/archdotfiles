@@ -1,0 +1,126 @@
+[2024-09-05 21:18:35.718] [info] Using configuration file /home/handesh/.config/waybar/config
+[2024-09-05 21:18:35.722] [info] Using CSS file /home/handesh/.config/waybar/style.css
+
+(waybar:1179066): Gtk-WARNING **: 21:18:35.723: Theme parsing error: style.css:58:12: The 'icon-shadow' property has been renamed to '-gtk-icon-shadow'
+[2024-09-05 21:18:35.733] [info] Hyprland IPC starting
+[2024-09-05 21:18:35.739] [info] Loading persistent workspaces from Waybar config
+[2024-09-05 21:18:35.740] [info] Loading persistent workspaces from Hyprland workspace rules
+[2024-09-05 21:18:35.774] [info] Loading persistent workspaces from Waybar config
+[2024-09-05 21:18:35.774] [info] Loading persistent workspaces from Hyprland workspace rules
+[2024-09-05 21:18:35.787] [info] Loading persistent workspaces from Waybar config
+[2024-09-05 21:18:35.787] [info] Loading persistent workspaces from Hyprland workspace rules
+
+** (waybar:1179066): WARNING **: 21:18:35.935: Status Notifier Item with bus name ':1.4' and object path '/org/ayatana/NotificationItem/nm_applet' is already registered
+[2024-09-05 21:18:36.240] [info] Bar configured (width: 1920, height: 20) for output: eDP-1
+[2024-09-05 21:18:36.241] [info] Bar configured (width: 1920, height: 20) for output: DP-1
+[2024-09-05 21:18:36.241] [info] Bar configured (width: 1920, height: 20) for output: DP-2
+
+** (waybar:1179066): WARNING **: 21:18:37.045: Status Notifier Item with bus name ':1.4' and object path '/org/ayatana/NotificationItem/nm_applet' is already registered
+
+(waybar:1179066): LIBDBUSMENU-GLIB-WARNING **: 21:32:56.921: Unable to replace properties on 0: Error getting properties for ID
+
+(waybar:1179066): LIBDBUSMENU-GLIB-WARNING **: 21:32:56.926: Unable to replace properties on 0: Error getting properties for ID
+
+(waybar:1179066): LIBDBUSMENU-GLIB-WARNING **: 21:32:56.929: Unable to replace properties on 0: Error getting properties for ID
+
+(waybar:1179066): LIBDBUSMENU-GLIB-WARNING **: 21:40:06.219: Unable to replace properties on 0: Error getting properties for ID
+
+(waybar:1179066): LIBDBUSMENU-GLIB-WARNING **: 21:40:06.225: Unable to replace properties on 0: Error getting properties for ID
+
+(waybar:1179066): LIBDBUSMENU-GLIB-WARNING **: 21:40:06.232: Unable to replace properties on 0: Error getting properties for ID
+
+(waybar:1179066): LIBDBUSMENU-GLIB-WARNING **: 21:46:42.217: Unable to replace properties on 0: Error getting properties for ID
+
+(waybar:1179066): LIBDBUSMENU-GLIB-WARNING **: 21:46:42.221: Unable to replace properties on 0: Error getting properties for ID
+
+(waybar:1179066): LIBDBUSMENU-GLIB-WARNING **: 21:46:42.224: Unable to replace properties on 0: Error getting properties for ID
+
+(waybar:1179066): LIBDBUSMENU-GLIB-WARNING **: 21:46:42.339: Unable to replace properties on 0: Error getting properties for ID
+
+(waybar:1179066): LIBDBUSMENU-GLIB-WARNING **: 21:46:42.344: Unable to replace properties on 0: Error getting properties for ID
+
+(waybar:1179066): LIBDBUSMENU-GLIB-WARNING **: 21:46:42.350: Unable to replace properties on 0: Error getting properties for ID
+
+(waybar:1179066): LIBDBUSMENU-GLIB-WARNING **: 21:47:11.991: Unable to replace properties on 0: Error getting properties for ID
+
+(waybar:1179066): LIBDBUSMENU-GLIB-WARNING **: 21:47:11.995: Unable to replace properties on 0: Error getting properties for ID
+
+(waybar:1179066): LIBDBUSMENU-GLIB-WARNING **: 21:47:12.002: Unable to replace properties on 0: Error getting properties for ID
+
+(waybar:1179066): LIBDBUSMENU-GLIB-WARNING **: 21:47:20.110: Unable to replace properties on 0: Error getting properties for ID
+
+(waybar:1179066): LIBDBUSMENU-GLIB-WARNING **: 21:47:20.117: Unable to replace properties on 0: Error getting properties for ID
+
+(waybar:1179066): LIBDBUSMENU-GLIB-WARNING **: 21:47:20.125: Unable to replace properties on 0: Error getting properties for ID
+
+(waybar:1179066): LIBDBUSMENU-GLIB-WARNING **: 21:47:20.739: Unable to replace properties on 0: Error getting properties for ID
+
+(waybar:1179066): LIBDBUSMENU-GLIB-WARNING **: 21:47:20.746: Unable to replace properties on 0: Error getting properties for ID
+
+(waybar:1179066): LIBDBUSMENU-GLIB-WARNING **: 21:47:20.757: Unable to replace properties on 0: Error getting properties for ID
+
+(waybar:1179066): LIBDBUSMENU-GLIB-WARNING **: 21:49:49.450: Unable to replace properties on 0: Error getting properties for ID
+
+(waybar:1179066): LIBDBUSMENU-GLIB-WARNING **: 21:49:49.455: Unable to replace properties on 0: Error getting properties for ID
+
+(waybar:1179066): LIBDBUSMENU-GLIB-WARNING **: 21:49:49.461: Unable to replace properties on 0: Error getting properties for ID
+
+(waybar:1179066): LIBDBUSMENU-GLIB-WARNING **: 21:49:52.253: Unable to replace properties on 0: Error getting properties for ID
+
+(waybar:1179066): LIBDBUSMENU-GLIB-WARNING **: 21:49:52.259: Unable to replace properties on 0: Error getting properties for ID
+
+(waybar:1179066): LIBDBUSMENU-GLIB-WARNING **: 21:49:52.263: Unable to replace properties on 0: Error getting properties for ID
+
+(waybar:1179066): LIBDBUSMENU-GLIB-WARNING **: 21:49:52.367: Unable to replace properties on 0: Error getting properties for ID
+
+(waybar:1179066): LIBDBUSMENU-GLIB-WARNING **: 21:49:52.373: Unable to replace properties on 0: Error getting properties for ID
+
+(waybar:1179066): LIBDBUSMENU-GLIB-WARNING **: 21:49:52.379: Unable to replace properties on 0: Error getting properties for ID
+
+(waybar:1179066): LIBDBUSMENU-GLIB-WARNING **: 21:49:57.586: Unable to replace properties on 0: Error getting properties for ID
+
+(waybar:1179066): LIBDBUSMENU-GLIB-WARNING **: 21:49:57.593: Unable to replace properties on 0: Error getting properties for ID
+
+(waybar:1179066): LIBDBUSMENU-GLIB-WARNING **: 21:49:57.599: Unable to replace properties on 0: Error getting properties for ID
+
+(waybar:1179066): LIBDBUSMENU-GLIB-WARNING **: 21:50:37.396: Unable to replace properties on 0: Error getting properties for ID
+
+(waybar:1179066): LIBDBUSMENU-GLIB-WARNING **: 21:50:37.402: Unable to replace properties on 0: Error getting properties for ID
+
+(waybar:1179066): LIBDBUSMENU-GLIB-WARNING **: 21:50:37.408: Unable to replace properties on 0: Error getting properties for ID
+
+(waybar:1179066): LIBDBUSMENU-GLIB-WARNING **: 21:50:37.464: Unable to replace properties on 0: Error getting properties for ID
+
+(waybar:1179066): LIBDBUSMENU-GLIB-WARNING **: 21:50:37.468: Unable to replace properties on 0: Error getting properties for ID
+
+(waybar:1179066): LIBDBUSMENU-GLIB-WARNING **: 21:50:37.474: Unable to replace properties on 0: Error getting properties for ID
+
+(waybar:1179066): LIBDBUSMENU-GLIB-WARNING **: 22:10:44.031: Unable to replace properties on 0: Error getting properties for ID
+
+(waybar:1179066): LIBDBUSMENU-GLIB-WARNING **: 22:10:44.034: Unable to replace properties on 0: Error getting properties for ID
+
+(waybar:1179066): LIBDBUSMENU-GLIB-WARNING **: 22:10:44.038: Unable to replace properties on 0: Error getting properties for ID
+
+(waybar:1179066): LIBDBUSMENU-GLIB-WARNING **: 22:10:45.940: Unable to replace properties on 0: Error getting properties for ID
+
+(waybar:1179066): LIBDBUSMENU-GLIB-WARNING **: 22:10:45.944: Unable to replace properties on 0: Error getting properties for ID
+
+(waybar:1179066): LIBDBUSMENU-GLIB-WARNING **: 22:10:45.948: Unable to replace properties on 0: Error getting properties for ID
+
+(waybar:1179066): LIBDBUSMENU-GLIB-WARNING **: 22:10:46.847: Unable to replace properties on 0: Error getting properties for ID
+
+(waybar:1179066): LIBDBUSMENU-GLIB-WARNING **: 22:10:46.851: Unable to replace properties on 0: Error getting properties for ID
+
+(waybar:1179066): LIBDBUSMENU-GLIB-WARNING **: 22:10:46.855: Unable to replace properties on 0: Error getting properties for ID
+
+(waybar:1179066): LIBDBUSMENU-GLIB-WARNING **: 22:10:51.864: Unable to replace properties on 0: Error getting properties for ID
+
+(waybar:1179066): LIBDBUSMENU-GLIB-WARNING **: 22:10:51.867: Unable to replace properties on 0: Error getting properties for ID
+
+(waybar:1179066): LIBDBUSMENU-GLIB-WARNING **: 22:10:51.870: Unable to replace properties on 0: Error getting properties for ID
+
+(waybar:1179066): LIBDBUSMENU-GLIB-WARNING **: 22:10:52.594: Unable to replace properties on 0: Error getting properties for ID
+
+(waybar:1179066): LIBDBUSMENU-GLIB-WARNING **: 22:10:52.602: Unable to replace properties on 0: Error getting properties for ID
+
+(waybar:1179066): LIBDBUSMENU-GLIB-WARNING **: 22:10:52.612: Unable to replace properties on 0: Error getting properties for ID
