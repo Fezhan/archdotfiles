@@ -40,12 +40,18 @@ setopt PROMPT_SUBST
 # GIT PROMPT (Native Zsh)
 # ==============================
 
-precmd() { vcs_info }
-
-zstyle ':vcs_info:git:*' formats ' (%b)'
+precmd() {
+  vcs_info
+  if [[ -n ${vcs_info_msg_0_} ]]; then
+    local repo_name
+    repo_name=$(basename "$(git rev-parse --show-toplevel 2>/dev/null)")
+    vcs_info_msg_0_=" (${repo_name}-${vcs_info_msg_0_//[()]/})"
+  fi
+}
+zstyle ':vcs_info:git:*' formats '(%b)'
 zstyle ':vcs_info:*' enable git
 
-PROMPT='%{$fg[green]%}%n@%m %{$fg[yellow]%}%~%{$fg[cyan]%}${vcs_info_msg_0_}%{$reset_color%} '
+PROMPT='%{$fg[green]%}%n@%m %{$fg[yellow]%}%~%{$fg_bold[cyan]%}${vcs_info_msg_0_}%{$reset_color%} '
 
 # ==============================
 # ALIASES
@@ -116,12 +122,13 @@ systemctl --user restart wireplumber
 # FUNCTIONS
 # ==============================
 
-manager() {
-    local tmp="$(mktemp -t yazi-cwd.XXXXXX)" cwd
-    yazi "$@" --cwd-file="$tmp"
-    cwd="$(<"$tmp")"
-    [[ -n "$cwd" && "$cwd" != "$PWD" ]] && cd "$cwd"
-    rm -f -- "$tmp"
+function yy() {
+	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")"
+	yazi "$@" --cwd-file="$tmp"
+	if cwd="$(cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
+		cd -- "$cwd"
+	fi
+	rm -f -- "$tmp"
 }
 
 # ==============================
