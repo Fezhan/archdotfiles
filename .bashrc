@@ -84,7 +84,7 @@ alias imager='sudo -E rpi-imager'
 # IP
 
 alias public='echo -e "\033[0;31m$(curl -s ipv4.icanhazip.com)\033[0m"'
-alias private='ip a show wlan1 | grep -oP "(?<=inet\s)\d+(\.\d+){3}"'
+alias private='ip a show wlp4s0 | grep -oP "(?<=inet\s)\d+(\.\d+){3}"'
 
 
 # Mount Drive
