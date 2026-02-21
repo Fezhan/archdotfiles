@@ -17,6 +17,7 @@
 # Your existing unignore rules
 !.config/alacritty/
 !.config/hypr/
+!.config/hypr/**
 !.config/i3/
 !.config/icon-explorer/
 !.config/lf/
