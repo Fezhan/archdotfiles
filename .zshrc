@@ -118,6 +118,13 @@ systemctl --user restart pipewire-pulse
 systemctl --user restart wireplumber
 '
 
+rootme() {
+    sudo chown root:root "$1"
+    sudo chmod 644 "$1"
+    echo "Ownership and permissions updated for $1"
+}
+
+
 # ==============================
 # FUNCTIONS
 # ==============================
