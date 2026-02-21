@@ -1,39 +1,63 @@
-# Ignore everything
 *
 
-# Unignore .gitignore and other root-level configs
 !.gitignore
 !.bashrc
 !.gitconfig
 !.installedpackages
 
-# Unignore .config itself
 !.config/
 
-# Then unignore folders inside it
 !.config/scripts/
-!.config/scripts/*
+!.config/scripts/**
 
-# Your existing unignore rules
-!.config/alacritty/
 !.config/hypr/
 !.config/hypr/**
+
+!.config/alacritty/
+!.config/alacritty/**
+
 !.config/i3/
+!.config/i3/**
+
 !.config/icon-explorer/
+!.config/icon-explorer/**
+
 !.config/lf/
+!.config/lf/**
+
 !.config/mpvpaper/
+!.config/mpvpaper/**
+
 !.config/ranger/
+!.config/ranger/**
+
 !.config/rofi/
+!.config/rofi/**
+
 !.config/sway/
+!.config/sway/**
+
 !.config/swaylock/
+!.config/swaylock/**
+
 !.config/swww/
+!.config/swww/**
+
 !.config/sxhkd/
-!.config/temp/waybar/
-!.config/waybar/*
+!.config/sxhkd/**
+
+!.config/temp/
+!.config/temp/**
+
+!.config/waybar/
+!.config/waybar/**
+
 !.config/wofi/
+!.config/wofi/**
+
 !.config/dolphinrc
 !.config/mimeapps.list
 !.config/pavucontrol.ini
-!.config/mpvpaper/*
-!scripts/*
 
+!scripts/
+!scripts/**
