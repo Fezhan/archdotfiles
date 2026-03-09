@@ -56,3 +56,5 @@ video/mp4=mpv.desktop;
 x-scheme-handler/mailto=userapp-Thunderbird-96NLK3.desktop;
 x-scheme-handler/mid=userapp-Thunderbird-96NLK3.desktop;
 application/x-compressed-tar=7zFM.desktop;
+application/x-bat=vim.desktop;
+application/x-shellscript=vim.desktop;

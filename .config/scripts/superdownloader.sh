@@ -141,12 +141,33 @@ fi
 
 CMD+=( "$URL" )
 
-# Show and run
+# Show and run (first attempt)
 echo "Running:"
 printf '  %q ' "${CMD[@]}"
 echo -e "\n"
 
-"${CMD[@]}"
+# Capture output and exit status
+set +e
+OUTPUT="$("${CMD[@]}" 2>&1)"
+STATUS=$?
+set -e
+
+echo "$OUTPUT"
+
+# If failed and Cloudflare impersonation is suggested
+if [[ $STATUS -ne 0 && "$OUTPUT" == *"Cloudflare anti-bot challenge"* ]]; then
+  echo
+  echo "⚠️  Cloudflare challenge detected. Retrying with impersonation..."
+
+  CMD+=( --extractor-args "generic:impersonate=chrome" )
+
+  echo
+  echo "Retrying with impersonation:"
+  printf '  %q ' "${CMD[@]}"
+  echo -e "\n"
+
+  "${CMD[@]}"
+fi
 
 echo
 echo "✅ Download complete!"
