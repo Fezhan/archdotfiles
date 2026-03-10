@@ -20,12 +20,12 @@ cycle() {
     if [[ "${profiles[$i]}" == "$current" ]]; then
       next_index=$(( (i + 1) % ${#profiles[@]} ))
       next="${profiles[$next_index]}"
-      echo "$next" | sudo tee "$PROFILE_FILE" >/dev/null
+      echo "$next" | sudo tee "$available_profiles" >/dev/null
       exit
     fi
   done
 
-  echo "balanced" | sudo tee "$PROFILE_FILE" >/dev/null
+  echo "balanced" | sudo tee "$available_profiles" >/dev/null
 }
 
 print_status() {
@@ -42,6 +42,7 @@ print_status() {
       icon=""
       ;;
     balanced-performance)
+      current="performance"
       icon=""
       ;;
     *)
@@ -49,12 +50,13 @@ print_status() {
       ;;
   esac
 
-  echo "{\"text\": \"$icon $current\"}"
+  echo "{\"text\": \"$icon\", \"alt\": \"$current\", \"tooltip\": \"$current\"}"
 }
 
 case "$1" in
   toggle)
-    cycle_profile
+    cycle
+    print_status
     ;;
   *)
     print_status
