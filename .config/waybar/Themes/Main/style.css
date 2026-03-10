@@ -45,6 +45,7 @@
 @define-color battery	@aqua;
 @define-color date	@black;
 @define-color time	@white;
+@define-color power @brblue;
 
 /* Reset all styles */
 * {
@@ -76,6 +77,7 @@
 #mode,
 #network,
 #pulseaudio,
+#custom-acer-power-profile,
 #temperature,
 #tray,
 #backlight,
@@ -194,6 +196,11 @@
 	background: @date;
 }
 
+#custom-acer-power-profile {
+	background: @power;
+	color: @white;
+}
+
 #clock.date {
 	background: @date;
 	color: @white;
@@ -224,7 +231,7 @@
 #custom-arrow3 {
 	font-size: 11pt;
 	color: @layout;
-	background: @battery;
+	background: @power;
 }
 
 #custom-arrow4 {
@@ -273,4 +280,10 @@
 	font-size: 11pt;
 	color: @unfocused;
 	background: transparent;
+}
+
+#custom-arrow12 {
+	font-size: 11pt;
+	color: @power;
+	background: @battery;
 }
