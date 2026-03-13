@@ -30,6 +30,7 @@
 @define-color bg2	#504945;
 @define-color beige #eedec5;
 @define-color orange #DE8638;
+@define-color pomodoropurple #973E76;
 
 @define-color warning 	@bryellow;
 @define-color critical	@red;
@@ -47,7 +48,7 @@
 @define-color date	@black;
 @define-color time	@white;
 @define-color power @brblue;
-@define-color pomodoro @orange;
+@define-color pomodoro @pomodoropurple;
 
 /* Reset all styles */
 * {
@@ -206,7 +207,7 @@
 
 #custom-pomodoro {
 	background: @pomodoro;
-	color: @black;
+	color: @white;
 }
 
 #clock.date {
