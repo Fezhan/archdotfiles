@@ -16,6 +16,8 @@
 		"pulseaudio",
 		"custom/arrow8",
 		"network",
+		"custom/arrow13",
+		"custom/pomodoro",
 		"custom/arrow7",
 		"memory",
 		"custom/arrow6",
@@ -133,6 +135,13 @@
 		"format-alt-click": "click-right",
 		"tooltip": true
 	},
+	"custom/pomodoro": {
+		"format": "{}",
+		"return-type": "json",
+		"exec": "waybar-module-pomodoro",
+		"on-click": "waybar-module-pomodoro toggle",
+		"on-click-right": "waybar-module-pomodoro reset",
+	},
 	"hyprland/window": {
 		"max-length": 80,
 		"tooltip": false,
@@ -248,6 +257,10 @@
 		"tooltip": false
 	},
 	"custom/arrow12": {
+		"format": "",
+		"tooltip": false
+	},
+	"custom/arrow13": {
 		"format": "",
 		"tooltip": false
 	}
