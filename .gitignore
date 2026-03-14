@@ -2,7 +2,6 @@
 .gitconfig
 !.gitignore
 !.zshrc
-!.gitconfig
 !.installedpackages
 
 !.config/
