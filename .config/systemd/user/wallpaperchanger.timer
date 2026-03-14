@@ -1,0 +1,10 @@
+[Unit]
+Description=Run wallpaperchanger every 30 minutes
+
+[Timer]
+OnBootSec=5min
+OnUnitActiveSec=30min
+Unit=wallpaperchanger.service
+
+[Install]
+WantedBy=timers.target
