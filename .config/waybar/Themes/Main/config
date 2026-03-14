@@ -91,7 +91,7 @@
 	"memory": {
 		"interval": 5,
 		"format": "\uefc5  {used:0.1f}G",
-		"format-alt": "\uefc5  {used:0.1f}G/{total:0.1f}G",
+		"format-alt": "\uefc5  {swapUsed:0.1f}G",
 		"format-alt-click": "click-right",
 		"states": {
 			"warning": 70,
