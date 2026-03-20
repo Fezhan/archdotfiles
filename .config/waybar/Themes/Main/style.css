@@ -117,6 +117,19 @@
 	color: @warning;
 }
 
+#custom-acer-power-profile.low-power {
+	color: #7aa2f7;
+}
+
+#custom-acer-power-profile.balanced {
+	color: #c0caf5;
+}
+
+#custom-acer-power-profile.performance {
+	color: #e0af68;
+}
+
+
 /* And now modules themselves in their respective order */
 
 /* Current sway mode (resize etc) */
