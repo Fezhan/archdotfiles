@@ -1,61 +1,91 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
-available_profiles="/sys/firmware/acpi/platform_profile"
+PROFILE_FILE="/sys/firmware/acpi/platform_profile"
+CHOICES_FILE="/sys/firmware/acpi/platform_profile_choices"
 
-all_profiles=(
-    "low-power"
-    "quiet"
-    "balanced"
-    "balanced-performance"
-)
-
-# Detect if on battery
+# ------------------------------
+# Detect battery state
+# ------------------------------
 on_battery() {
-    # Check AC adapter status
     if grep -q "0" /sys/class/power_supply/AC*/online 2>/dev/null; then
-        return 0  # on battery
+        return 0
     else
-        return 1  # on AC
+        return 1
     fi
 }
 
+# ------------------------------
+# Current profile
+# ------------------------------
 get_current() {
-    cat "$available_profiles"
+    cat "$PROFILE_FILE"
 }
 
+# ------------------------------
+# Get firmware supported profiles
+# ------------------------------
+get_choices() {
+    cat "$CHOICES_FILE"
+}
+
+# ------------------------------
+# Cycle profiles
+# ------------------------------
 cycle() {
+
     current=$(get_current)
 
-    # Decide which profiles to use
+    # read supported profiles
+    read -ra all_profiles <<< "$(get_choices)"
+
+    # restrict on battery
     if on_battery; then
-        profiles=( "low-power" "balanced" )
+        profiles=()
+        for p in "${all_profiles[@]}"; do
+            if [[ "$p" == "low-power" || "$p" == "balanced" ]]; then
+                profiles+=("$p")
+            fi
+        done
     else
-        profiles=( "${all_profiles[@]}" )
+        profiles=("${all_profiles[@]}")
     fi
 
-    # Cycle through the selected profiles
+    # find next profile
     for i in "${!profiles[@]}"; do
         if [[ "${profiles[$i]}" == "$current" ]]; then
             next_index=$(( (i + 1) % ${#profiles[@]} ))
             next="${profiles[$next_index]}"
-            echo "$next" | sudo tee "$available_profiles" >/dev/null
-            exit
+            break
         fi
     done
 
-    # Default to balanced if current profile not found
-    echo "balanced" | sudo tee "$available_profiles" >/dev/null
+    # fallback
+    [[ -z "$next" ]] && next="balanced"
+
+    # don't rewrite same profile
+    if [[ "$next" == "$current" ]]; then
+        return
+    fi
+
+    # retry firmware write (Acer sometimes refuses first attempt)
+    for i in {1..3}; do
+        if echo "$next" | sudo tee /sys/firmware/acpi/platform_profile >/dev/null 2>&1; then
+            break
+        fi
+        sleep 0.2
+    done
 }
 
+# ------------------------------
+# Waybar output
+# ------------------------------
 print_status() {
+
     current=$(get_current)
 
     case "$current" in
         low-power)
             icon="󰌪"
-            ;;
-        quiet)
-            icon=""
             ;;
         balanced)
             icon=""
@@ -65,13 +95,16 @@ print_status() {
             icon=""
             ;;
         *)
-            icon="?"
+            icon=""
             ;;
     esac
 
-    echo "{\"text\": \"$icon\", \"alt\": \"$current\", \"tooltip\": \"$current\"}"
+    echo "{\"text\":\"$icon\",\"alt\":\"$current\",\"tooltip\":\"$current\"}"
 }
 
+# ------------------------------
+# Entry point
+# ------------------------------
 case "$1" in
     toggle)
         cycle
