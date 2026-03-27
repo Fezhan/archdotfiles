@@ -33,6 +33,7 @@
 @define-color rose #c27a7a;
 @define-color pomodoropurple #973E76;
 @define-color pastelblue #7387c7;
+@define-color bryellow #d0992a;
 
 @define-color warning 	@bryellow;
 @define-color critical	@red;
@@ -51,6 +52,7 @@
 @define-color time	@white;
 @define-color power @brblue;
 @define-color pomodoro @pastelblue;
+@define-color notification @orange;
 
 /* Reset all styles */
 * {
@@ -90,7 +92,8 @@
 #disk,
 #user,
 #mpris,
-#custom-pomodoro {
+#custom-pomodoro,
+#custom-notification {
 	padding-left: 8pt;
 	padding-right: 8pt;
 }
@@ -129,6 +132,11 @@
 	color: #e0af68;
 }
 
+#custom-notification {
+	background: @notification;
+	color: @black;
+	font-family: "NotoSansMono Nerd Font";
+}
 
 /* And now modules themselves in their respective order */
 
@@ -249,7 +257,7 @@
 #custom-arrow2 {
 	font-size: 11pt;
 	color: @date;
-	background: @layout;
+	background: @notification;
 }
 
 #custom-arrow3 {
@@ -316,4 +324,10 @@
 	font-size: 11pt;
 	color: @pomodoro;
 	background: @network;
+}
+
+#custom-arrow14 {
+	font-size: 11pt;
+	color: @notification;
+	background: @layout;
 }
