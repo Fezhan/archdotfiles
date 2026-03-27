@@ -30,6 +30,8 @@
 		"custom/acer-power-profile",
 		"custom/arrow3",
 		"idle_inhibitor",
+		"custom/arrow14",
+		"custom/notification",
 		"custom/arrow2",
 		"tray",
 		"clock#date",
@@ -135,6 +137,26 @@
 		"format-alt-click": "click-right",
 		"tooltip": true
 	},
+	"custom/notification": {
+              "tooltip": false,
+              "format": "{icon}",
+              "format-icons": {
+                   	"notification": "󱅫",
+					"none": "󰂜",
+					"dnd-notification": "󰂠",
+					"dnd-none": "󰪓",
+					"inhibited-notification": "󰂛",
+					"inhibited-none": "󰪑",
+					"dnd-inhibited-notification": "󰂛",
+					"dnd-inhibited-none": "󰪑"
+              },
+              "return-type": "json",
+              "exec-if": "which swaync-client",
+              "exec": "swaync-client -swb",
+              "on-click": "swaync-client -t -sw",
+              "on-click-right": "swaync-client -d -sw",
+              "escape": true
+    },
 	"custom/pomodoro": {
 		"format": "{}",
 		"return-type": "json",
@@ -261,6 +283,10 @@
 		"tooltip": false
 	},
 	"custom/arrow13": {
+		"format": "",
+		"tooltip": false
+	},
+	"custom/arrow14": {
 		"format": "",
 		"tooltip": false
 	}
