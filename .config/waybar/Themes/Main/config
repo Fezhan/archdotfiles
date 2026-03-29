@@ -82,7 +82,7 @@
 		}
 	},
 	"idle_inhibitor": {
-		"format": "{icon} ",
+		"format": "{icon}",
 		"format-icons": {
 			"activated": "\udb80\udf3e",
 			"deactivated": "\udb80\udf3f"
