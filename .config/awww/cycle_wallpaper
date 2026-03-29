@@ -1,7 +1,7 @@
 #!/usr/bin/bash
 
 # Directory containing wallpapers
-wallpaper_dir="$HOME/.config/swww/wallpapers"
+wallpaper_dir="$HOME/.config/awww/wallpapers"
 
 # File to store the index of the last wallpaper used
 index_file="$HOME/.last_wallpaper_index"
@@ -26,7 +26,7 @@ next_index=$(( (last_index + 1) % total ))
 wallpaper="$wallpaper_dir/${wallpapers[$next_index]}"
 
 # Apply the wallpaper with swww
-swww img "$wallpaper" \
+awww img "$wallpaper" \
     --transition-bezier 0.5,1.19,.8,.4 \
     --transition-type wave \
     --transition-duration 2 \

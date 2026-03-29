@@ -1,10 +1,10 @@
 #!/usr/bin/bash
 
-random=$(ls $HOME/.config/swww/wallpapers/ | shuf -n 1)
+random=$(ls $HOME/.config/awww/wallpapers/ | shuf -n 1)
 
-wallpaper="$HOME/.config/swww/wallpapers/$random"
+wallpaper="$HOME/.config/awww/wallpapers/$random"
 
-swww img "$wallpaper" \
+awww img "$wallpaper" \
         --transition-bezier 0.5,1.19,.8,.4 \
         --transition-type wave \
         --transition-duration 2 \
