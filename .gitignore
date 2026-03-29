@@ -24,8 +24,8 @@
 !.config/rofi/
 !.config/rofi/**
 
-!.config/swww/
-!.config/swww/**
+!.config/awww/
+!.config/awww/**
 
 !.config/sxhkd/
 !.config/sxhkd/**
