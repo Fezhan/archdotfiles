@@ -1,4 +1,6 @@
 *
+Desktop/
+Documents/
 .gitconfig
 !.gitignore
 !.zshrc
