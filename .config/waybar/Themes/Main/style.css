@@ -189,6 +189,11 @@
 	color: @black;
 }
 
+#privacy {
+	background: @sound;
+	color: @black
+}
+
 #network {
 	background: @network;
 	color: @white;

@@ -14,6 +14,7 @@
 	"modules-right": [
 		"custom/arrow9",
 		"pulseaudio",
+		"privacy",
 		"custom/arrow8",
 		"network",
 		"custom/arrow13",
@@ -163,6 +164,34 @@
 		"exec": "waybar-module-pomodoro --persist",
 		"on-click": "waybar-module-pomodoro toggle",
 		"on-click-right": "waybar-module-pomodoro reset"
+	},
+	"privacy": {
+		"icon-spacing": 4,
+		"icon-size": 18,
+		"transition-duration": 250,
+		"modules": [
+			{
+				"type": "screenshare",
+				"tooltip": true,
+				"tooltip-icon-size": 24
+			},
+			{
+				"type": "audio-in",
+				"tooltip": true,
+				"tooltip-icon-size": 24
+			}
+		],
+		"ignore-monitor": true,
+		"ignore": [
+			{
+				"type": "audio-in",
+				"name": "cava"
+			},
+			{
+				"type": "screenshare",
+				"name": "obs"
+			}
+		]
 	},
 	"hyprland/window": {
 		"max-length": 80,
