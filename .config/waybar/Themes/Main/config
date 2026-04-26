@@ -166,6 +166,7 @@
 		"on-click-right": "waybar-module-pomodoro reset"
 	},
 	"privacy": {
+		"on-click": "pavucontrol -t 4",
 		"icon-spacing": 4,
 		"icon-size": 18,
 		"transition-duration": 250,
