@@ -1,0 +1,83 @@
+* {
+    border: none;
+    border-radius: 0;
+    font-family: "Adwaita Sans", "JetBrainsMono Nerd Font Propo", Roboto, Helvetica, Arial, sans-serif;
+    font-weight: 600;
+    font-size: 1.05rem;
+    min-height: 40px;
+}
+
+window#waybar {
+    background: transparent;
+}
+
+tooltip {
+    background: rgba(43, 48, 59, 0.5);
+    border: 1px solid rgba(100, 114, 125, 0.5);
+}
+
+tooltip label {
+    color: white;
+}
+
+#workspaces button {
+    padding: 0 5px;
+    background: transparent;
+    color: white;
+    border-bottom: 3px solid transparent;
+}
+
+#workspaces button.focused {
+    background: #64727D;
+    border-bottom: 3px solid white;
+}
+
+#clock {
+    background-color: #64727D;
+}
+
+#battery {
+    background-color: #ffffff;
+    color: black;
+}
+
+#battery.charging {
+    color: white;
+    background-color: #26A65B;
+}
+
+#battery.warning:not(.charging) {
+    background: #f53c3c;
+    color: white;
+    animation-name: blink;
+    animation-duration: 0.5s;
+    animation-timing-function: steps(12);
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+.modules-left {
+    margin-left: 15px;
+}
+
+.modules-right {
+    margin-right: 15px;
+}
+
+
+#custom-launcher,
+#clock,
+#workspaces,
+#custom-notification,
+#custom-media,
+#custom-weather,
+#pulseaudio,
+#network,
+#power-profiles-daemon {
+    background-color: #121212;
+    margin: 0 10px;
+}
+
+#power-profiles-daemon {
+    margin: 0;
+}

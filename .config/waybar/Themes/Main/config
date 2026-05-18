@@ -7,18 +7,17 @@
 	"modules-left": [
 		"hyprland/workspaces",
 		"custom/arrow10"
-	]
-	,
-	
+	],
 	"modules-center": [
 		"hyprland/window"
 	],
-
 	"modules-right": [
 		"custom/arrow9",
 		"pulseaudio",
 		"custom/arrow8",
 		"network",
+		"custom/arrow13",
+		"custom/pomodoro",
 		"custom/arrow7",
 		"memory",
 		"custom/arrow6",
@@ -27,6 +26,8 @@
 		"temperature",
 		"custom/arrow4",
 		"battery",
+		"custom/arrow12",
+		"power-profiles-daemon",
 		"custom/arrow3",
 		"idle_inhibitor",
 		"custom/arrow2",
@@ -35,39 +36,39 @@
 		"custom/arrow1",
 		"clock#time"
 	],
-
-	// Modules
-
 	"battery": {
-        	"format": "{icon}  ",
-        	"format-alt": "{capacity} %  ",
+		"format": "{icon} ",
+		"format-alt": "{capacity} % ",
 		"format-alt-click": "click-right",
-        	"format-icons": ["\uf244", "\uf243", "\uf242", "\uf241", "\uf240"],
-        	"format-charging": "{capacity}% ⚡",
-        	"interval": 15,
-        	"states": {
-            		"warning": 25,
-            		"critical": 10
-        	},
-        	"tooltip": false
-    	},
-
+		"format-icons": [
+			"\uf244",
+			"\uf243",
+			"\uf242",
+			"\uf241",
+			"\uf240"
+		],
+		"format-charging": "{capacity}% ⚡",
+		"interval": 15,
+		"states": {
+			"warning": 25,
+			"critical": 10
+		},
+		"tooltip": false
+	},
 	"clock#time": {
 		"interval": 10,
 		"format": "{:L%H:%M}",
 		"timezone": "Europe/London",
 		"tooltip": false
 	},
-
 	"clock#date": {
 		"interval": 20,
 		"format": "{:%e %B %Y}",
 		"format-alt": "{:%a %d %b %Y}",
 		"format-alt-click": "click-right",
-		"tooltip": false
-		//"tooltip-format": "{:%e %B %Y}"
+		"tooltip": false,
+		"tooltip-format": "{:%e %B %Y}"
 	},
-
 	"cpu": {
 		"interval": 5,
 		"tooltip": false,
@@ -78,20 +79,19 @@
 			"critical": 90
 		}
 	},
-
 	"idle_inhibitor": {
-		"format": " {icon} ",
+		"format": "{icon} ",
 		"format-icons": {
 			"activated": "\udb80\udf3e",
-			"deactivated": "\udb80\udf3f"},
+			"deactivated": "\udb80\udf3f"
+		},
 		"tooltip": false,
 		"start-activated": true
 	},
-
 	"memory": {
 		"interval": 5,
 		"format": "\uefc5  {used:0.1f}G",
-		"format-alt": "\uefc5  {used:0.1f}G/{total:0.1f}G",
+		"format-alt": "\uefc5  {swapUsed:0.1f}G",
 		"format-alt-click": "click-right",
 		"states": {
 			"warning": 70,
@@ -99,58 +99,92 @@
 		},
 		"tooltip": false
 	},
-
 	"network": {
-		"interval": 1,
+		"interval": 10,
 		"format-wifi": "{icon}  {essid} ({signalStrength}%)",
 		"format-ethernet": "{icon} {ifname}",
 		"format-disconnected": "No connection",
 		"format-alt": "{ipaddr}/{cidr}  ({bandwidthUpBits} | {bandwidthDownBits})",
 		"format-alt-click": "click-right",
 		"format-icons": {
-			"wifi": ["\udb82\udd2f", "\udb82\udd1f", "\udb82\udd22", "\udb82\udd25", "\udb82\udd28"],
-            		"ethernet": ["\udb80\ude01"],
-            		"disconnected": ["\udb81\uddaa"]
+			"wifi": [
+				"\udb82\udd2f",
+				"\udb82\udd1f",
+				"\udb82\udd22",
+				"\udb82\udd25",
+				"\udb82\udd28"
+			],
+			"ethernet": [
+				"\udb80\ude01"
+			],
+			"disconnected": [
+				"\udb81\uddaa"
+			]
 		},
 		"tooltip": false,
 		"on-click": "nm-connection-editor"
 	},
-
+	"power-profiles-daemon": {
+  		"format": "{icon}",
+  		"tooltip-format": "Power profile: {profile}\nDriver: {driver}",
+  		"tooltip": true,
+  		"format-icons": {
+    			"default": "",
+    			"performance": "",
+    			"balanced": "",
+	    		"power-saver": ""
+  		}
+	},
+	"custom/pomodoro": {
+		"format": "{}",
+		"return-type": "json",
+		"exec": "waybar-module-pomodoro",
+		"on-click": "waybar-module-pomodoro toggle",
+		"on-click-right": "waybar-module-pomodoro reset",
+	},
 	"hyprland/window": {
 		"max-length": 80,
-        	"tooltip": false,
+		"tooltip": false,
 		"format": "{}",
 		"rewrite": {
-        		"(.*) — Mozilla Firefox": "$1",
+			"(.*) — Mozilla Firefox": "$1",
 			"(.*) — Microsoft Edge": "$1"
-		
-		/*Enter any suffixes here to remove them*/
+		},
+		"separate-outputs": true
 	},
-	"separate-outputs": true
-	},
-
 	"hyprland/workspaces": {
 		"persistent-workspaces": {
-	  	  "*": [ 1, 3, 5, 9]
+			"*": [
+				1,
+				3,
+				5,
+				9
+			]
 		},
-        	"format": "{name}",
-        	"disable-scroll": true
+		"format": "{name}",
+		"disable-scroll": true
 	},
-
 	"pulseaudio": {
 		"format": "{icon}",
-        	"format-alt": "{volume} {icon}",
-        	"format-alt-click": "click-right",
-        	"format-muted": "󰝟",
-        	"format-icons": {
-            		"phone": [" ", " ", " "],
-            		"default": ["", "", ""]
-        	},
-        	"scroll-step": 1,
-        	"on-click": "pavucontrol",
-        	"tooltip": false
+		"format-alt": "{volume} {icon}",
+		"format-alt-click": "click-right",
+		"format-muted": "󰝟",
+		"format-icons": {
+			"phone": [
+				" ",
+				" ",
+				" "
+			],
+			"default": [
+				"",
+				"",
+				""
+			]
+		},
+		"scroll-step": 1,
+		"on-click": "pavucontrol",
+		"tooltip": false
 	},
-
 	"temperature": {
 		"critical-threshold": 90,
 		"interval": 5,
@@ -164,79 +198,70 @@
 		],
 		"tooltip": false
 	},
-
 	"tray": {
 		"icon-size": 18
-		//"spacing": 10
 	},
-
 	"custom/youtubemusic": {
 		"interval": 5,
 		"max-length": 500,
-        	"return-type": "json",
-        	"exec": "/home/handesh/.config/waybar/modules/./youtubemusic.sh",
-        	
-        	"escape": true,
+		"return-type": "json",
+		"exec": "/home/handesh/.config/waybar/modules/./youtubemusic.sh",
+		"escape": true,
 		"format": "{}",
 		"on-click": "playerctl previous",
 		"on-click-middle": "playerctl play-pause",
 		"on-click-right": "playerctl next"
-    },
-
+	},
 	"custom/arrow1": {
 		"format": "",
 		"tooltip": false
 	},
-
 	"custom/arrow2": {
 		"format": "",
 		"tooltip": false
 	},
-
 	"custom/arrow3": {
 		"format": "",
 		"tooltip": false
 	},
-
 	"custom/arrow4": {
 		"format": "",
 		"tooltip": false
 	},
-
 	"custom/arrow5": {
 		"format": "",
 		"tooltip": false
 	},
-
 	"custom/arrow6": {
 		"format": "",
 		"tooltip": false
 	},
-
 	"custom/arrow7": {
 		"format": "",
 		"tooltip": false
 	},
-
 	"custom/arrow8": {
 		"format": "",
 		"tooltip": false
 	},
-
 	"custom/arrow9": {
 		"format": "",
 		"tooltip": false
 	},
-
 	"custom/arrow10": {
 		"format": "",
 		"tooltip": false
 	},
-
 	"custom/arrow11": {
+		"format": "",
+		"tooltip": false
+	},
+	"custom/arrow12": {
+		"format": "",
+		"tooltip": false
+	},
+	"custom/arrow13": {
 		"format": "",
 		"tooltip": false
 	}
 }
-
-// vi:ft=jsonc

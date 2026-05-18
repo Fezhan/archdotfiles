@@ -28,7 +28,11 @@
 @define-color braqua	#8ec07c;
 @define-color white	#ebdbb2;
 @define-color bg2	#504945;
-
+@define-color beige #eedec5;
+@define-color orange #d65d0e;
+@define-color rose #c27a7a;
+@define-color pomodoropurple #973E76;
+@define-color pastelblue #7387c7;
 
 @define-color warning 	@bryellow;
 @define-color critical	@red;
@@ -45,6 +49,8 @@
 @define-color battery	@aqua;
 @define-color date	@black;
 @define-color time	@white;
+@define-color power @brblue;
+@define-color pomodoro @pastelblue;
 
 /* Reset all styles */
 * {
@@ -76,13 +82,15 @@
 #mode,
 #network,
 #pulseaudio,
+#power-profiles-daemon,
 #temperature,
 #tray,
 #backlight,
 #idle_inhibitor,
 #disk,
 #user,
-#mpris {
+#mpris,
+#custom-pomodoro {
 	padding-left: 8pt;
 	padding-right: 8pt;
 }
@@ -108,6 +116,19 @@
 #battery.warning.discharging {
 	color: @warning;
 }
+
+#power-profiles-daemon.power-saver {
+	color: #7aa2f7;
+}
+
+#power-profiles-daemon.balanced {
+	color: #c0caf5;
+}
+
+#power-profiles-daemon.performance {
+	color: #e0af68;
+}
+
 
 /* And now modules themselves in their respective order */
 
@@ -194,6 +215,16 @@
 	background: @date;
 }
 
+#power-profiles-daemon {
+	background: @power;
+	color: @white;
+}
+
+#custom-pomodoro {
+	background: @pomodoro;
+	color: @white;
+}
+
 #clock.date {
 	background: @date;
 	color: @white;
@@ -224,7 +255,7 @@
 #custom-arrow3 {
 	font-size: 11pt;
 	color: @layout;
-	background: @battery;
+	background: @power;
 }
 
 #custom-arrow4 {
@@ -248,7 +279,7 @@
 #custom-arrow7 {
 	font-size: 11pt;
 	color: @memory;
-	background: @network;
+	background: @pomodoro;
 }
 
 #custom-arrow8 {
@@ -273,4 +304,16 @@
 	font-size: 11pt;
 	color: @unfocused;
 	background: transparent;
+}
+
+#custom-arrow12 {
+	font-size: 11pt;
+	color: @power;
+	background: @battery;
+}
+
+#custom-arrow13 {
+	font-size: 11pt;
+	color: @pomodoro;
+	background: @network;
 }
