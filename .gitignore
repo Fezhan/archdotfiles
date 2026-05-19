@@ -49,5 +49,8 @@ Documents/
 !.config/systemd/**
 .config/systemd/user/timers.target.wants
 
+!.config/ghostty
+!.config/ghostty/**
+
 !scripts/
 !scripts/**
