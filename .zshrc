@@ -54,14 +54,15 @@ precmd() {
   if [[ -n ${vcs_info_msg_0_} ]]; then
     local repo_name
     repo_name=$(basename "$(git rev-parse --show-toplevel 2>/dev/null)")
+    # Strip existing parentheses, format cleanly as (repo-branch)
     vcs_info_msg_0_=" (${repo_name}-${vcs_info_msg_0_//[()]/})"
   fi
 }
-zstyle ':vcs_info:git:*' formats '(%b)'
+# Removed the parentheses from the format string here so they don't double up
+zstyle ':vcs_info:git:*' formats '%b'
 zstyle ':vcs_info:*' enable git
 
 PROMPT='%{$fg[green]%}%n@%m %{$fg[yellow]%}%~%{$fg_bold[cyan]%}${vcs_info_msg_0_}%{$reset_color%} '
-
 # ==============================
 # ALIASES
 # ==============================
@@ -78,9 +79,6 @@ alias powershell='pwsh'
 alias pacsyu='sudo pacman -Syu'
 alias pacs='sudo pacman -S'
 alias paki='paru -S'
-
-# waybar
-alias waybar='waybar & disown'
 
 # WLAN
 alias wlan0on='sudo ip link set wlan0 up'
