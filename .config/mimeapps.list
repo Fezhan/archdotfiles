@@ -28,6 +28,7 @@ application/vnd.openxmlformats-officedocument.wordprocessingml.document=libreoff
 x-scheme-handler/mailto=userapp-Thunderbird-96NLK3.desktop
 message/rfc822=userapp-Thunderbird-96NLK3.desktop
 x-scheme-handler/mid=userapp-Thunderbird-96NLK3.desktop
+x-scheme-handler/discord-671636579701358592=lunarclient.desktop
 
 [Added Associations]
 text/plain=org.remmina.Remmina.desktop;

@@ -69,7 +69,7 @@ cycle() {
 
     # retry firmware write (Acer sometimes refuses first attempt)
     for i in {1..3}; do
-        if echo "$next" | sudo tee /sys/firmware/acpi/platform_profile >/dev/null 2>&1; then
+        if echo "$next" | tee /sys/firmware/acpi/platform_profile >/dev/null 2>&1; then
             break
         fi
         sleep 0.2
