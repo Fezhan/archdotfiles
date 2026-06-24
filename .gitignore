@@ -4,6 +4,7 @@ Documents/
 .gitconfig
 !.gitignore
 !.zshrc
+!.oh-my-zsh/oh-my-zsh.sh
 !.installedpackages
 
 !.config/
