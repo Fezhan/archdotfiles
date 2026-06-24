@@ -4,43 +4,51 @@ PROFILE_FILE="/sys/firmware/acpi/platform_profile"
 CHOICES_FILE="/sys/firmware/acpi/platform_profile_choices"
 
 # ------------------------------
-# Detect battery state
+# Detect battery state (robust)
 # ------------------------------
 on_battery() {
-    if grep -q "0" /sys/class/power_supply/AC*/online 2>/dev/null; then
-        return 0
-    else
-        return 1
-    fi
+    for f in /sys/class/power_supply/*/online; do
+        [[ -f "$f" ]] || continue
+        if [[ "$(cat "$f")" == "1" ]]; then
+            return 1  # AC power connected
+        fi
+    done
+    return 0  # no AC detected -> battery
 }
 
 # ------------------------------
 # Current profile
 # ------------------------------
 get_current() {
-    cat "$PROFILE_FILE"
+    cat "$PROFILE_FILE" 2>/dev/null
 }
 
 # ------------------------------
 # Get firmware supported profiles
 # ------------------------------
 get_choices() {
-    cat "$CHOICES_FILE"
+    cat "$CHOICES_FILE" 2>/dev/null
 }
 
 # ------------------------------
 # Cycle profiles
 # ------------------------------
 cycle() {
+    local current next=""
+    current="$(get_current)"
 
-    current=$(get_current)
+    # Read profiles safely (sysfs is whitespace-separated in most cases)
+    mapfile -t all_profiles < "$CHOICES_FILE" 2>/dev/null
 
-    # read supported profiles
-    read -ra all_profiles <<< "$(get_choices)"
+    # Fallback if mapfile fails
+    if [[ ${#all_profiles[@]} -eq 0 ]]; then
+        read -r -a all_profiles <<< "$(get_choices)"
+    fi
 
-    # restrict on battery
+    # Restrict profiles on battery
+    local profiles=()
+
     if on_battery; then
-        profiles=()
         for p in "${all_profiles[@]}"; do
             if [[ "$p" == "low-power" || "$p" == "balanced" ]]; then
                 profiles+=("$p")
@@ -50,26 +58,29 @@ cycle() {
         profiles=("${all_profiles[@]}")
     fi
 
-    # find next profile
+    # Safety fallback if filtering removed everything
+    if [[ ${#profiles[@]} -eq 0 ]]; then
+        profiles=("balanced")
+    fi
+
+    # Find next profile
     for i in "${!profiles[@]}"; do
         if [[ "${profiles[$i]}" == "$current" ]]; then
-            next_index=$(( (i + 1) % ${#profiles[@]} ))
+            local next_index=$(( (i + 1) % ${#profiles[@]} ))
             next="${profiles[$next_index]}"
             break
         fi
     done
 
-    # fallback
+    # Fallback if current not found
     [[ -z "$next" ]] && next="balanced"
 
-    # don't rewrite same profile
-    if [[ "$next" == "$current" ]]; then
-        return
-    fi
+    # No-op if same
+    [[ "$next" == "$current" ]] && return
 
-    # retry firmware write (Acer sometimes refuses first attempt)
-    for i in {1..3}; do
-        if echo "$next" | tee /sys/firmware/acpi/platform_profile >/dev/null 2>&1; then
+    # Retry write (firmware can be stubborn)
+    for _ in {1..3}; do
+        if echo "$next" | sudo tee "$PROFILE_FILE" >/dev/null 2>&1; then
             break
         fi
         sleep 0.2
@@ -80,8 +91,9 @@ cycle() {
 # Waybar output
 # ------------------------------
 print_status() {
+    local current icon
 
-    current=$(get_current)
+    current="$(get_current)"
 
     case "$current" in
         low-power)
@@ -90,7 +102,7 @@ print_status() {
         balanced)
             icon=""
             ;;
-        balanced-performance)
+        balanced-performance|performance)
             current="performance"
             icon=""
             ;;
@@ -99,7 +111,8 @@ print_status() {
             ;;
     esac
 
-    echo "{\"text\":\"$icon\",\"alt\":\"$current\",\"tooltip\":\"$current\"}"
+    printf '{"text":"%s","alt":"%s","tooltip":"%s"}\n' \
+        "$icon" "$current" "$current"
 }
 
 # ------------------------------
