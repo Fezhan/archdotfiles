@@ -9,6 +9,9 @@ Documents/
 
 !.config/
 
+!.config/yazi/
+!.config/yazi/**
+
 !.config/scripts/
 !.config/scripts/**
 
