@@ -4,23 +4,19 @@ PROFILE_FILE="/sys/firmware/acpi/platform_profile"
 CHOICES_FILE="/sys/firmware/acpi/platform_profile_choices"
 
 # ------------------------------
-# Detect battery state (robust)
+# Detect battery state (Optimized & Fast)
 # ------------------------------
 on_battery() {
-    for f in /sys/class/power_supply/*/online; do
-        [[ -f "$f" ]] || continue
-        if [[ "$(cat "$f")" == "1" ]]; then
-            return 1  # AC power connected
-        fi
-    done
-    return 0  # no AC detected -> battery
+    # If any online file reports 1, we are on AC power
+    grep -q "1" /sys/class/power_supply/*/online 2>/dev/null && return 1
+    return 0  # No online AC source found -> Battery
 }
 
 # ------------------------------
 # Current profile
 # ------------------------------
 get_current() {
-    cat "$PROFILE_FILE" 2>/dev/null
+    cat "$PROFILE_FILE" 2>/dev/null || echo "balanced"
 }
 
 # ------------------------------
@@ -37,17 +33,12 @@ cycle() {
     local current next=""
     current="$(get_current)"
 
-    # Read profiles safely (sysfs is whitespace-separated in most cases)
-    mapfile -t all_profiles < "$CHOICES_FILE" 2>/dev/null
+    # Fix: Safely parse space-separated list into an array
+    local -a all_profiles
+    read -r -a all_profiles <<< "$(get_choices)"
 
-    # Fallback if mapfile fails
-    if [[ ${#all_profiles[@]} -eq 0 ]]; then
-        read -r -a all_profiles <<< "$(get_choices)"
-    fi
-
-    # Restrict profiles on battery
-    local profiles=()
-
+    # Restrict profiles on battery (And completely drop broken "quiet" profile)
+    local -a profiles=()
     if on_battery; then
         for p in "${all_profiles[@]}"; do
             if [[ "$p" == "low-power" || "$p" == "balanced" ]]; then
@@ -55,13 +46,15 @@ cycle() {
             fi
         done
     else
-        profiles=("${all_profiles[@]}")
+        for p in "${all_profiles[@]}"; do
+            if [[ "$p" != "quiet" ]]; then
+                profiles+=("$p")
+            fi
+        done
     fi
 
     # Safety fallback if filtering removed everything
-    if [[ ${#profiles[@]} -eq 0 ]]; then
-        profiles=("balanced")
-    fi
+    [[ ${#profiles[@]} -eq 0 ]] && profiles=("balanced")
 
     # Find next profile
     for i in "${!profiles[@]}"; do
@@ -73,14 +66,14 @@ cycle() {
     done
 
     # Fallback if current not found
-    [[ -z "$next" ]] && next="balanced"
+    [[ -z "$next" ]] && next="${profiles[0]}"
 
     # No-op if same
     [[ "$next" == "$current" ]] && return
 
-    # Retry write (firmware can be stubborn)
+    # Retry write using pkexec (Wayland background execution safe)
     for _ in {1..3}; do
-        if echo "$next" | sudo tee "$PROFILE_FILE" >/dev/null 2>&1; then
+        if echo "$next" | pkexec tee "$PROFILE_FILE" >/dev/null 2>&1; then
             break
         fi
         sleep 0.2
@@ -92,7 +85,6 @@ cycle() {
 # ------------------------------
 print_status() {
     local current icon
-
     current="$(get_current)"
 
     case "$current" in
@@ -103,7 +95,6 @@ print_status() {
             icon=""
             ;;
         balanced-performance|performance)
-            current="performance"
             icon=""
             ;;
         *)
