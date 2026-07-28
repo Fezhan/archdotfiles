@@ -1,0 +1,101 @@
+#!/bin/bash
+set -euo pipefail
+
+PKGROOT="$HOME/Documents/MyAUR"
+REPO="/srv/customrepo/x86_64"
+CACHE="$HOME/.cache/custompkgcache"
+HASHFILE="$CACHE/hashmap"
+TMP_REPO="$REPO/.tmp"
+
+KEY="E01B5B762B9A5518EA0D8F482631CD9E45CFA602"
+
+mkdir -p "$REPO" "$CACHE" "$TMP_REPO"
+touch "$HASHFILE"
+
+# Seed the temp repo with current packages so old-version cleanup actually works
+if [ -n "$(ls -A "$REPO")" ]; then
+    cp -P "$REPO"/* "$TMP_REPO/" 2>/dev/null || true
+fi
+
+declare -A oldhashes
+
+echo "Loading build cache..."
+while read -r pkg hash; do
+    oldhashes["$pkg"]="$hash"
+done < "$HASHFILE"
+
+> "$HASHFILE.new"
+
+echo "Checking for changes..."
+
+for dir in "$PKGROOT"/*; do
+    if [[ -f "$dir/PKGBUILD" ]]; then
+        pkg=$(basename "$dir")
+
+        newhash=$(sha256sum "$dir/PKGBUILD" | awk '{print $1}')
+        oldhash="${oldhashes[$pkg]:-}"
+
+        if [[ "$newhash" == "$oldhash" ]]; then
+            echo "Skipping $pkg (no changes)"
+            echo "$pkg $newhash" >> "$HASHFILE.new"
+            continue
+        fi
+
+        echo "Building $pkg"
+
+        (
+            cd "$dir"
+            # makepkg handles its own internal cleanups (-c)
+            makepkg -sf -c --noconfirm --sign --key "$KEY"
+        )
+
+        pkgfile=$(find "$dir" -maxdepth 1 -name "*.pkg.tar.zst" | head -n 1)
+
+        if [[ -z "$pkgfile" ]]; then
+            echo "Build failed for $pkg"
+            exit 1
+        fi
+
+        cp "$pkgfile" "$pkgfile.sig" "$TMP_REPO/"
+        echo "$pkg $newhash" >> "$HASHFILE.new"
+
+        echo "Cleaning up local build artifacts for $pkg..."
+        rm -f "$pkgfile" "$pkgfile.sig"
+        
+        # Clean up src/pkg directories left behind by makepkg
+        rm -rf "$dir/src" "$dir/pkg"
+    fi
+done
+
+
+echo "Cleaning old package versions..."
+cd "$TMP_REPO"
+
+# Safer way to parse base names without destroying package names with numbers
+for pkg in *.pkg.tar.zst; do
+    [[ -e "$pkg" ]] || break
+    # Strips everything starting from the last two hyphens (version and release)
+    base=$(echo "$pkg" | rev | cut -d'-' -f3- | rev)
+    
+    # Clean up old packages & signatures safely
+    ls "${base}"-[0-9]*.pkg.tar.zst 2>/dev/null | sort -V | head -n -1 | xargs -r rm -f
+    ls "${base}"-[0-9]*.pkg.tar.zst.sig 2>/dev/null | sort -V | head -n -1 | xargs -r rm -f
+done
+
+echo "Creating signed repo database..."
+# Delete the old DB files in TMP_REPO first so repo-add generates a fresh one cleanly
+rm -f "$TMP_REPO"/myaur.db* "$TMP_REPO"/myaur.files*
+repo-add -s -k "$KEY" "$TMP_REPO/myaur.db.tar.gz" "$TMP_REPO"/*.pkg.tar.zst
+
+echo "Atomic repo update..."
+# Create a swap deployment to minimize downtime
+mkdir -p "$REPO.new"
+mv "$TMP_REPO"/* "$REPO.new/"
+rm -rf "$REPO"
+mv "$REPO.new" "$REPO"
+mkdir -p "$TMP_REPO"
+
+echo "Saving cache..."
+mv "$HASHFILE.new" "$HASHFILE"
+
+echo "Repo update complete"
