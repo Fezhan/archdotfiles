@@ -2,6 +2,8 @@
 Description=Run autocommit checker periodically
 
 [Timer]
+# Run 2 minutes after boot/login, then every 1 hour after that
+OnBootSec=2min
 OnUnitActiveSec=1h
 Persistent=true
 
