@@ -4,104 +4,120 @@
 set -euo pipefail
 
 # -------------------------------------------------------------------
-# Configuration
+# List of Git Repositories to Check
+# Add as many absolute paths as you want to this array:
 # -------------------------------------------------------------------
-REPO_PATH="$HOME/Projects/autocommit"
+REPOS=(
+    "$HOME/Projects/autocommit"
+    "$HOME/Projects/test"                      # Your dotfiles repo in home
+    # "$HOME/Projects/another-repo"
+)
+
 REMOTE_NAME="origin"
 BRANCH_NAME="main"
 PAUSE_FILE_NAME=".pause_git_check"
-PAUSE_FILE="$REPO_PATH/$PAUSE_FILE_NAME"
-GITIGNORE_FILE="$REPO_PATH/.gitignore"
 PAUSE_DURATION_SECONDS=86400  # 24 hours in seconds
-
-# Move to the repository directory
-cd "$REPO_PATH" || exit 1
-
-# -------------------------------------------------------------------
-# Check for Active Pause
-# -------------------------------------------------------------------
-if [ -f "$PAUSE_FILE" ]; then
-    PAUSE_TIME=$(cat "$PAUSE_FILE")
-    NOW_TIME=$(date +%s)
-    ELAPSED=$(( NOW_TIME - PAUSE_TIME ))
-
-    if [ "$ELAPSED" -lt "$PAUSE_DURATION_SECONDS" ]; then
-        # Still paused, exit silently
-        exit 0
-    else
-        # Pause period expired, clean up the state file
-        rm -f "$PAUSE_FILE"
-    fi
-fi
-
-# -------------------------------------------------------------------
-# Check for local changes
-# -------------------------------------------------------------------
-if [ -z "$(git status --porcelain)" ]; then
-    # No changes, exit cleanly
-    exit 0
-fi
-
-# -------------------------------------------------------------------
-# Dispatch Notification with Actions
-# -------------------------------------------------------------------
-ACTION=$(notify-send \
-    --app-name="Git Tracker" \
-    --urgency=normal \
-    --action="custom=Write Custom Message" \
-    --action="timestamp=Commit with Date/Time" \
-    --action="pause=Pause for 1 Day" \
-    --action="ignore=Ignore" \
-    "Uncommitted Git Changes" \
-    "Local changes detected in $(basename "$REPO_PATH"). What would you like to do?")
 
 # Helper function to stage, commit, and push
 commit_and_push() {
-    local msg="$1"
-    git add -A
-    if git commit -m "$msg"; then
-        if git push "$REMOTE_NAME" "$BRANCH_NAME"; then
-            notify-send "Git Tracker" "Successfully committed and pushed changes."
+    local repo_dir="$1"
+    local msg="$2"
+
+    git -C "$repo_dir" add -A
+    if git -C "$repo_dir" commit -m "$msg"; then
+        # Try to push to configured branch, fallback to current active branch if needed
+        local current_branch
+        current_branch=$(git -C "$repo_dir" rev-parse --abbrev-ref HEAD)
+        
+        if git -C "$repo_dir" push "$REMOTE_NAME" "$current_branch"; then
+            notify-send "Git Tracker" "Successfully committed and pushed changes for $(basename "$repo_dir")."
         else
-            notify-send -u critical "Git Tracker" "Failed to push changes to remote."
+            notify-send -u critical "Git Tracker" "Failed to push changes to remote for $(basename "$repo_dir")."
         fi
     else
-        notify-send -u critical "Git Tracker" "Failed to make git commit."
+        notify-send -u critical "Git Tracker" "Failed to make git commit for $(basename "$repo_dir")."
     fi
 }
 
 # -------------------------------------------------------------------
-# Handle User Selection
+# Iterate Through Repositories Sequentially
 # -------------------------------------------------------------------
-case "$ACTION" in
-    "custom")
-        COMMIT_MSG=$(zenity --entry \
-            --title="Your Commit Message" \
-            --text="Enter commit message for $(basename "$REPO_PATH"):" \
-            --entry-text="WIP")
+for REPO_PATH in "${REPOS[@]}"; do
+    # Expand path and check if folder exists and is a git repo
+    if [ ! -d "$REPO_PATH/.git" ] && ! git -C "$REPO_PATH" rev-parse --git-dir > /dev/null 2>&1; then
+        continue
+    fi
 
-        if [ -n "$COMMIT_MSG" ]; then
-            commit_and_push "$COMMIT_MSG"
+    PAUSE_FILE="$REPO_PATH/$PAUSE_FILE_NAME"
+    GITIGNORE_FILE="$REPO_PATH/.gitignore"
+
+    # 1. Check for active pause in this specific repository
+    if [ -f "$PAUSE_FILE" ]; then
+        PAUSE_TIME=$(cat "$PAUSE_FILE")
+        NOW_TIME=$(date +%s)
+        ELAPSED=$(( NOW_TIME - PAUSE_TIME ))
+
+        if [ "$ELAPSED" -lt "$PAUSE_DURATION_SECONDS" ]; then
+            # Still paused for this repo, skip to next
+            continue
+        else
+            # Pause expired, clean up state file
+            rm -f "$PAUSE_FILE"
         fi
-        ;;
+    fi
 
-    "timestamp")
-        NOW=$(date '+%Y-%m-%d %H:%M:%S')
-        commit_and_push "auto: $NOW"
-        ;;
+    # 2. Check for local changes
+    if [ -z "$(git -C "$REPO_PATH" status --porcelain)" ]; then
+        # No uncommitted changes, check next repo
+        continue
+    fi
 
-    "pause")
-        # Ensure .pause_git_check is ignored in .gitignore
-        if [ ! -f "$GITIGNORE_FILE" ] || ! grep -qxF "$PAUSE_FILE_NAME" "$GITIGNORE_FILE"; then
-            echo "$PAUSE_FILE_NAME" >> "$GITIGNORE_FILE"
-        fi
+    REPO_NAME=$(basename "$REPO_PATH")
 
-        # Save current Unix timestamp to pause file
-        date +%s > "$PAUSE_FILE"
-        notify-send "Git Tracker" "Notifications paused for $(basename "$REPO_PATH") for 24 hours."
-        ;;
+    # 3. Dispatch notification for this repository
+    ACTION=$(notify-send \
+        --app-name="Git Tracker" \
+        --urgency=normal \
+        --action="custom=Write Custom Message" \
+        --action="timestamp=Commit with Date/Time" \
+        --action="pause=Pause for 1 Day" \
+        --action="ignore=Ignore" \
+        "Uncommitted Changes: $REPO_NAME" \
+        "Local changes detected in $REPO_NAME. What would you like to do?")
 
-    "ignore"|*)
-        exit 0
-        ;;
-esac
+    # 4. Handle User Selection
+    case "$ACTION" in
+        "custom")
+            COMMIT_MSG=$(zenity --entry \
+                --title="Commit Message ($REPO_NAME)" \
+                --text="Enter commit message for $REPO_NAME:" \
+                --entry-text="WIP")
+
+            if [ -n "$COMMIT_MSG" ]; then
+                commit_and_push "$REPO_PATH" "$COMMIT_MSG"
+            fi
+            ;;
+
+        "timestamp")
+            NOW=$(date '+%Y-%m-%d %H:%M:%S')
+            commit_and_push "$REPO_PATH" "auto: $NOW"
+            ;;
+
+        "pause")
+            # Ensure .pause_git_check is ignored in repo's .gitignore
+            if [ -f "$GITIGNORE_FILE" ]; then
+                if ! grep -qxF "$PAUSE_FILE_NAME" "$GITIGNORE_FILE"; then
+                    echo "$PAUSE_FILE_NAME" >> "$GITIGNORE_FILE"
+                fi
+            fi
+
+            # Save pause timestamp
+            date +%s > "$PAUSE_FILE"
+            notify-send "Git Tracker" "Notifications paused for $REPO_NAME for 24 hours."
+            ;;
+
+        "ignore"|*)
+            # Continue loop to next repository
+            ;;
+    esac
+done
