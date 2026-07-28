@@ -56,5 +56,11 @@ Documents/
 !.config/ghostty
 !.config/ghostty/**
 
+# Track .local/bin while keeping other .local contents ignored
+!.local/
+.local/*
+!.local/bin/
+!.local/bin/**
+
 !scripts/
 !scripts/**
