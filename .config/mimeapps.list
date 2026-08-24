@@ -1,6 +1,8 @@
-
 [Default Applications]
 x-scheme-handler/discord-671636579701358592=lunarclient.desktop
 x-scheme-handler/lunarclient=lunarclient.desktop
 text/plain=vim.desktop
 inode/directory=thunar.desktop
+
+[Added Associations]
+application/zip=xarchiver.desktop;
