@@ -35,3 +35,10 @@ hl.monitor({
     position = "1920x-1080",
     scale    = 1,
 })
+
+hl.monitor({
+    output   = "desc:LTM LCD 0x01010101",
+    mode     = "1920x1080@60",
+    position = "1920x-1080",
+    scale    = 1,
+})
