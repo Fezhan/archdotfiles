@@ -31,14 +31,14 @@ hl.monitor({
 -- Direct HDMI Monitor (NVIDIA dGPU - only active when plugged in)
 hl.monitor({
     output   = "desc:LG Electronics LG HDR 4K 507NTKFPY365",
-    mode     = "1920x1080@60",
+    mode     = "3840x2160@60",
     position = "1920x-1080",
     scale    = 1,
 })
 
 hl.monitor({
     output   = "desc:LTM LCD 0x01010101",
-    mode     = "1920x1080@60",
+    mode     = "3840x2160@60",
     position = "1920x-1080",
     scale    = 1,
 })
