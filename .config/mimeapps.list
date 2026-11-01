@@ -1,9 +1,11 @@
 [Default Applications]
 x-scheme-handler/discord-671636579701358592=lunarclient.desktop
 x-scheme-handler/lunarclient=lunarclient.desktop
-text/plain=vim.desktop
+text/plain=code-oss.desktop
 inode/directory=thunar.desktop
 x-scheme-handler/rpi-imager=com.raspberrypi.rpi-imager-uri-handler.desktop
+application/zip=xarchiver.desktop
 
 [Added Associations]
 application/zip=xarchiver.desktop;
+text/plain=libreoffice-calc.desktop;code-oss.desktop;

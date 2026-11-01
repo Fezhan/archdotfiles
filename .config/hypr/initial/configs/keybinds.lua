@@ -20,11 +20,15 @@ local menu = "~/.config/rofi/launchers/type-1/./launcher.sh"
 
 hl.bind(mainMod .. " + " .. "T", hl.dsp.exec_cmd("ghostty"))
 
+hl.bind(mainMod .. " + " .. "V", hl.dsp.exec_cmd("~/.config/cliphist/./clipboard.sh"))
+
 hl.bind(mainMod .. " + " .. "Q", hl.dsp.window.close())
 
 hl.bind(mainMod .. " + " .. "M", hl.dsp.exit())
 
 hl.bind(mainMod .. " + " .. "E", hl.dsp.exec_cmd("thunar"))
+
+hl.bind(mainMod .. " + " .. "Y", hl.dsp.exec_cmd("pear-desktop --use-angle=vulkan"))
 
 hl.bind(mainMod .. " + " .. "F", hl.dsp.window.fullscreen())
 

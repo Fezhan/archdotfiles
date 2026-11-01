@@ -6,7 +6,7 @@
 
 hl.config({
     cursor = {
-        inactive_timeout = 30,
+        inactive_timeout = 20,
         hide_on_key_press = true,
         hide_on_touch = true,
     },
