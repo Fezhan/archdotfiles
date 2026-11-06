@@ -140,7 +140,7 @@
 		"return-type": "json",
 		"exec": "waybar-module-pomodoro",
 		"on-click": "waybar-module-pomodoro toggle",
-		"on-click-right": "waybar-module-pomodoro reset",
+		"on-click-right": "waybar-module-pomodoro reset"
 	},
 	"hyprland/window": {
 		"max-length": 80,

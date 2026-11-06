@@ -117,17 +117,6 @@
 	color: @warning;
 }
 
-#power-profiles-daemon.power-saver {
-	color: #7aa2f7;
-}
-
-#power-profiles-daemon.balanced {
-	color: #c0caf5;
-}
-
-#power-profiles-daemon.performance {
-	color: #e0af68;
-}
 
 
 /* And now modules themselves in their respective order */
